@@ -1,0 +1,10 @@
+# Cloudflare reads this file when it deploys the suggestion relay from GitHub.
+# Setup: see worker/SETUP.md, "Update the relay automatically from GitHub".
+name = "padri-kalan-form"            # must match the Worker's name in Cloudflare
+main = "suggestions-worker.js"
+compatibility_date = "2024-09-23"
+workers_dev = true
+
+# Keep GITHUB_REPO and ALLOWED_ORIGINS exactly as you typed them in the Cloudflare dashboard.
+# (Secrets such as GITHUB_TOKEN are always kept.) Never put the token in this file.
+keep_vars = true

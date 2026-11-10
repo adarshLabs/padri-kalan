@@ -9,6 +9,27 @@ Everything here is free. It takes about 15 minutes, once.
 
 ---
 
+## Update the relay automatically from GitHub (one time, 5 minutes)
+
+After this, whenever you push a change to `worker/suggestions-worker.js`, Cloudflare updates the relay by itself. You never paste code again. It's free, and your token and settings stay in Cloudflare as they are.
+
+1. Cloudflare → **Workers & Pages** → click **padri-kalan-form**.
+2. Open the **Settings** tab → find **Build** → click **Connect** (next to "Git repository").
+3. Choose **GitHub**. If asked, click **Install & Authorize**, then allow Cloudflare to see only the **padri-kalan** repository.
+4. Pick repository **adarshLabs/padri-kalan** and branch **main**.
+5. Fill in the build settings:
+   - **Build command:** leave empty
+   - **Deploy command:** `npx wrangler deploy`
+   - **Root directory (Path):** `/worker`
+   - **Build watch paths → Include paths:** `worker/*` (so changes to the website alone don't redeploy the relay)
+6. Click **Connect** (or **Save**).
+7. Push any change (or click **Retry build** on the **Deployments** tab). When the build turns green, it's done.
+
+Check: **Settings → Variables and Secrets** should still show `GITHUB_TOKEN`, `GITHUB_REPO` and `ALLOWED_ORIGINS`. The file `worker/wrangler.toml` tells Cloudflare to keep them.
+If the build fails with a "name" error, the Worker in Cloudflare has a different name: change `name = "..."` in `worker/wrangler.toml` to match it and push again.
+
+---
+
 ## Already set up? Turn on photos and videos (5 minutes)
 
 **A. Let the key save files (2 min)**
@@ -17,7 +38,7 @@ Everything here is free. It takes about 15 minutes, once.
 3. Click **Edit**, scroll to **Repository permissions**, and set **Contents** to **Read and write** (leave **Issues** on Read and write).
 4. Click **Update** at the bottom. The token text stays the same, so you don't need to change anything in Cloudflare.
 
-**B. Put the new relay code on Cloudflare (2 min)**
+**B. Put the new relay code on Cloudflare (2 min)** (skip this if you connected GitHub above: just push)
 1. Cloudflare → **Workers & Pages** → **padri-kalan-form** → **Edit code**.
 2. Select everything in the editor and delete it.
 3. Open `worker/suggestions-worker.js` from this folder, copy all of it, and paste it in.

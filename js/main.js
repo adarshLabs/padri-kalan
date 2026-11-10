@@ -54,6 +54,7 @@
       sending: { hi: 'संदेश भेजा जा रहा है…', en: 'Sending your message…' },
       ok: { hi: '✅ धन्यवाद! आपका संदेश वेबसाइट टीम तक पहुँच गया है।', en: '✅ Thank you! Your message has reached the website team.' },
       okFiles: { hi: '✅ धन्यवाद! आपका संदेश और सभी फ़ाइलें पहुँच गई हैं।', en: '✅ Thank you! Your message and all files have arrived.' },
+      noRelayFiles: { hi: '⚠️ संदेश पहुँच गया, पर फ़ाइलें नहीं भेजी जा सकीं (फ़ॉर्म की सेटिंग अधूरी है)। कृपया बाद में दोबारा भेजें।', en: '⚠️ Your message arrived, but the files could not be sent (the form is not fully set up yet). Please try again later.' },
       partFiles: { hi: '⚠️ संदेश पहुँच गया, पर कुछ फ़ाइलें नहीं जा सकीं। अच्छे नेटवर्क में दोबारा भेजें।', en: '⚠️ Your message arrived, but some files could not be sent. Try again on a better network.' },
       fail: { hi: '❌ संदेश नहीं जा सका। इंटरनेट जाँचकर दोबारा कोशिश करें।', en: '❌ The message could not be sent. Check your internet and try again.' },
       notSetup: { hi: 'फ़ॉर्म अभी चालू नहीं हुआ है। कृपया कुछ दिन बाद कोशिश करें।', en: 'The form is not switched on yet. Please try again in a few days.' },
@@ -136,8 +137,9 @@
       return fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) })
         .then(function (r) { return r.json().catch(function () { return { success: false, error: 'HTTP ' + r.status }; }); });
     };
+    var lastErr = '';
     var uploadAll = function (base, issue, key) {
-      var ok = 0, i = 0;
+      var ok = 0, i = 0; lastErr = '';
       var step = function () {
         if (i >= picked.length) return Promise.resolve(ok);
         var p = picked[i++]; say(progressText(i, picked.length));
@@ -147,8 +149,9 @@
             var q = '?issue=' + issue + '&n=' + i + '&size=' + x.b64.length + '&name=' + encodeURIComponent(x.name) + '&key=' + encodeURIComponent(key);
             return fetch(base + '/upload' + q, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: x.b64 });
           })
-          .then(function (r) { return r.json().catch(function () { return {}; }); })
-          .then(function (d) { if (d && d.success) ok++; }, function () {})
+          .then(function (r) { return r.json().catch(function () { return { error: 'HTTP ' + r.status }; }); })
+          .then(function (d) { if (d && d.success) ok++; else { lastErr = (d && d.error) || 'unknown'; if (window.console) console.warn('Upload failed:', lastErr); } },
+                function (e) { lastErr = 'network'; if (window.console) console.warn('Upload failed:', e); })
           .then(step);
       };
       return step();
@@ -173,11 +176,15 @@
       sendBtn.disabled = true; if (fileInput) fileInput.disabled = true; say(tt('sending'));
       req.then(function (d) {
         if (!d || !d.success) { say(tt('fail'), 'err'); if (window.console) console.warn('Suggestion form:', d && d.error); return; }
-        if (!relay || !picked.length || !d.uploadKey) { form.reset(); picked = []; renderFiles(); say(tt('ok'), 'good'); return; }
+        if (relay && picked.length && !d.uploadKey) { // Worker in Cloudflare is an old version that does not accept files
+          if (window.console) console.warn('Suggestion form: relay gave no uploadKey; redeploy worker/suggestions-worker.js');
+          form.reset(); picked = []; renderFiles(); say(tt('noRelayFiles'), 'err'); return;
+        }
+        if (!relay || !picked.length) { form.reset(); picked = []; renderFiles(); say(tt('ok'), 'good'); return; }
         var total = picked.length;
         return uploadAll(relay, d.issue, d.uploadKey).then(function (ok) {
           form.reset(); picked = []; renderFiles();
-          say(ok === total ? tt('okFiles') : tt('partFiles'), ok === total ? 'good' : 'err');
+          say(ok === total ? tt('okFiles') : tt('partFiles') + (lastErr ? ' [' + lastErr + ']' : ''), ok === total ? 'good' : 'err');
         });
       }).catch(function () { say(tt('fail'), 'err'); })
         .then(function () { sendBtn.disabled = false; if (fileInput) fileInput.disabled = false; });
