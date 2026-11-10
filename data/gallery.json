@@ -1,0 +1,14 @@
+{
+  "_help": "Photo gallery. Put the image file in the images/ folder (resize to about 1200px wide, under 300 KB). Add an item ONLY when you have the photographer's permission; set permission to true. Photos showing people also need those people's consent. Never copy photos from Google, Facebook, YouTube or news sites. Items without permission:true and a licence are never shown. Example (hidden):",
+  "items": [
+    {
+      "permission": false,
+      "src": "images/example-baleshwari-mandir.jpg",
+      "caption": { "hi": "बालेश्वरी मंदिर, नवरात्रि 2026", "en": "Baleshwari Mandir, Navratri 2026" },
+      "credit": "Photographer's name",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourceUrl": ""
+    }
+  ]
+}

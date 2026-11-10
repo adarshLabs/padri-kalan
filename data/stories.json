@@ -1,0 +1,13 @@
+{
+  "_help": "Village stories. Write the story in Hindi (hi) and, if you can, English (en). Separate paragraphs with a blank line (\\n\\n). Set permission to true only when the teller (or their family) agreed to publishing. teller is optional; leave it out if they prefer not to be named. Example (hidden):",
+  "items": [
+    {
+      "permission": false,
+      "topic": { "hi": "गाँव का नाम", "en": "The village name" },
+      "title": { "hi": "पडरी नाम कैसे पड़ा", "en": "How Padri got its name" },
+      "body": { "hi": "पहला पैराग्राफ़...\n\nदूसरा पैराग्राफ़...", "en": "First paragraph...\n\nSecond paragraph..." },
+      "teller": { "hi": "नाम (उम्र)", "en": "Name (age)" },
+      "date": "2026-11"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Padri Kalan community website · पडरी कलाँ सामुदायिक वेबसाइट
 
-A free, bilingual (Hindi + English), community-run website for Padri Kalan village, Bichhiya block, Unnao district, Uttar Pradesh.
+A free, bilingual (Hindi + English), community-run, multi-page website for Padri Kalan village, Bichhiya block, Unnao district, Uttar Pradesh.
 
 It is a plain static site: HTML, CSS and a little JavaScript, with no build step, no database, no ads and no tracking. It works on cheap phones and slow networks, and keeps working offline after the first visit.
 
@@ -10,11 +10,16 @@ It is a plain static site: HTML, CSS and a little JavaScript, with no build step
 
 ## 1. What's in the site
 
+The site has seven pages: `index.html` (home: welcome, page cards, latest 3 notices), `about.html` (About, Facts, History, Getting here), `temple.html` (Baleshwari Mandir), `gallery.html` (Photos and Stories), `services.html` (Services and helplines), `notices.html` (Notices and Village pride) and `contribute.html` (Contribute, Disclaimer, Sources).
+
 | Section | What it shows |
 |---|---|
 | About | Name, location, administrative details (district, tehsil, block, census code, PIN) |
 | Facts | Census 2011 population, literacy, work and farming figures, each with its source |
 | History | Verified history of the Awadh region, Unnao district and Bichhiya block, plus a call for elders' stories |
+| Baleshwari Mandir | The village temple of Maa Baleshwari Devi: map link, what still needs collecting, and confirmed facts from `data/temple.json` |
+| Photo gallery | Photos with photographer credit and licence from `data/gallery.json`, plus a wishlist of photos to ask villagers for |
+| Village stories | Elders' stories from `data/stories.json`, plus questions to ask elders |
 | Getting here | Road, rail and air distances, neighbouring villages, schools and health centres |
 | Services | Links to official government portals (land records, certificates, PM-KISAN, ration, pension, scholarships, grievances) and toll-free helplines |
 | Notices | Village notices and events, read from `data/notices.json` |
@@ -104,8 +109,14 @@ Remember the comma between items. Click **Commit changes**; the site updates in 
 ### Add someone to the pride wall
 Only after they (or a parent, if under 18) agree **in writing**, for example on WhatsApp. Add them to `data/pride.json` with `"consent": true`. Entries without `"consent": true` are never shown.
 
+### Add a photo
+Put the file in `images/` (about 1200 px wide, under 300 KB), then add it to `data/gallery.json` with the photographer's name, licence and `"permission": true`. See `images/README.md`. Never copy photos from Google, Facebook, YouTube or news sites.
+
+### Add a story or temple fact
+Add a story to `data/stories.json` with `"permission": true`. Add a temple fact (aarti time, mela date, founding) to `data/temple.json` with `"confirmed": true` once the priest, the temple committee or several elders confirm it.
+
 ### Change any text
-Each sentence in `index.html` appears twice, once inside `lang="hi"` and once inside `lang="en"`. Change both.
+Each page is a plain HTML file. The top bar, menu and footer are repeated in all seven pages, so if you change the menu, change it in every page. Each sentence appears twice, once inside `lang="hi"` and once inside `lang="en"`. Change both.
 
 ### After changing files
 Open `sw.js` and bump `VERSION` (for example `pk-v1` to `pk-v2`), so phones that saved the site offline fetch the new copy.
@@ -142,13 +153,23 @@ Talking to the Gram Pradhan before launch is a good idea. Their blessing helps p
 
 ```
 padri-kalan-website/
-├── index.html              the whole website (Hindi + English)
+├── index.html              home page
+├── about.html              about, census facts, history, getting here
+├── temple.html             Baleshwari Mandir
+├── gallery.html            photos and stories
+├── services.html           government links and helplines
+├── notices.html            notices and village pride
+├── contribute.html         contribute, disclaimer, sources
 ├── 404.html                "page not found"
 ├── css/style.css           design (light + dark)
 ├── js/config.js            ← your GitHub username, form link, share text
 ├── js/main.js              language toggle, notices, pride wall, share, offline
 ├── data/notices.json       ← village notices (edit this)
 ├── data/pride.json         ← village pride wall (edit this, consent only)
+├── data/gallery.json       ← photos with credit + licence
+├── data/stories.json       ← elders' stories
+├── data/temple.json        ← confirmed Baleshwari Mandir facts
+├── images/                 ← photo files go here
 ├── assets/icon.svg         original logo
 ├── manifest.webmanifest    lets people "Add to Home screen"
 ├── sw.js                   offline support

@@ -1,0 +1,8 @@
+{
+  "_help": "Confirmed facts about the Baleshwari Mandir. Add a fact only when it is confirmed by the temple priest/committee or several elders, then set confirmed to true. Unconfirmed items are never shown. Examples (hidden):",
+  "items": [
+    { "confirmed": false, "label": { "hi": "आरती का समय", "en": "Aarti timings" }, "value": { "hi": "सुबह __ बजे, शाम __ बजे", "en": "__ am and __ pm" }, "source": "Temple committee" },
+    { "confirmed": false, "label": { "hi": "मुख्य पर्व / मेला", "en": "Main festival / mela" }, "value": { "hi": "", "en": "" }, "source": "" },
+    { "confirmed": false, "label": { "hi": "स्थापना", "en": "Founded" }, "value": { "hi": "", "en": "" }, "source": "" }
+  ]
+}

@@ -39,6 +39,12 @@ Every fact on the site, where it came from, and how sure we are. Checked on 10 N
 - geoiq.io's "2020 population 7,434" is a model estimate, not a census figure.
 - Exact map coordinates, because no reliable source was found. The site links to a map search instead.
 
+## Baleshwari Mandir and photos (searched 10 Nov 2026)
+
+- Searched in English and Hindi ("Baleshwari Mandir Padri Kalan", "बालेश्वरी मंदिर पडरी उन्नाव", "बालेश्वरी देवी मंदिर उन्नाव बिछिया", and others). **No web page, news story or record about the temple was found.** The site names the temple because villagers know it, and leaves the details to be confirmed locally.
+- **No freely licensed (Creative Commons / Wikimedia) photos of Padri Kalan or the temple were found.** Photos on Google Maps, Facebook, YouTube and news sites are copyrighted and are not copied. The gallery is built to take villagers' own photos with credit.
+- A possible lead: a YouTube video titled "पडरी रामलीला … Laxman Parshuram Samvad" (https://www.youtube.com/watch?v=cCKS8qUFqdQ). It is not confirmed to be this Padri. If it is, ask the channel owner before linking or embedding it.
+
 ## Not yet found online (collect locally)
 
 The village's own history and origin of its name, temples and ponds, fairs and festivals, the market day, crops grown, the panchayat bhawan, anganwadi and ration shop locations, and notable people (with consent).

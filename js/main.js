@@ -13,30 +13,32 @@
   }
 
   // ---- Language ----
-  var langBtn = document.getElementById('langBtn');
-  langBtn.addEventListener('click', function () {
+  function $(id) { return document.getElementById(id); }
+  function on(id, ev, fn) { var el = $(id); if (el) el.addEventListener(ev, fn); }
+  var langBtn = $('langBtn');
+  if (langBtn) langBtn.addEventListener('click', function () {
     var next = lang() === 'hi' ? 'en' : 'hi';
     root.dataset.lang = next; root.lang = next; store('pk-lang', next);
-    renderNotices(); renderPride();
+    renderAll();
   });
 
   // ---- Theme ----
-  document.getElementById('themeBtn').addEventListener('click', function () {
+  on('themeBtn', 'click', function () {
     var dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
     var next = dark ? 'light' : 'dark';
     root.dataset.theme = next; store('pk-theme', next);
   });
 
   // ---- Mobile menu ----
-  var menuBtn = document.getElementById('menuBtn'), nav = document.getElementById('nav');
-  menuBtn.addEventListener('click', function () {
+  var menuBtn = $('menuBtn'), nav = $('nav');
+  if (menuBtn && nav) menuBtn.addEventListener('click', function () {
     var open = nav.classList.toggle('open');
     menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
-  nav.addEventListener('click', function (e) { if (e.target.closest('a')) { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); } });
+  if (nav) nav.addEventListener('click', function (e) { if (e.target.closest('a')) { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); } });
 
   // ---- Share ----
-  document.getElementById('shareBtn').addEventListener('click', function () {
+  on('shareBtn', 'click', function () {
     var text = (cfg.shareText && cfg.shareText[lang()]) || 'Padri Kalan';
     var url = location.href.split('#')[0];
     if (navigator.share) { navigator.share({ title: document.title, text: text, url: url }).catch(function () {}); return; }
@@ -47,8 +49,8 @@
   var repoUrl = 'https://github.com/' + (cfg.githubUser || '') + '/' + (cfg.githubRepo || '');
   var configured = cfg.githubUser && cfg.githubUser.indexOf('YOUR-') !== 0;
   var issueUrl = configured ? repoUrl + '/issues/new/choose' : 'https://github.com/';
-  document.getElementById('issueLink').href = issueUrl;
-  document.getElementById('contribLink').href = cfg.contributeFormUrl || issueUrl;
+  if ($('issueLink')) $('issueLink').href = issueUrl;
+  if ($('contribLink')) $('contribLink').href = cfg.contributeFormUrl || issueUrl;
 
   // ---- Bars animate on view ----
   var fills = document.querySelectorAll('.fill[data-w]');
@@ -59,16 +61,21 @@
   } else fillAll();
 
   // ---- Back to top ----
-  var toTop = document.getElementById('toTop');
-  addEventListener('scroll', function () { toTop.classList.toggle('show', scrollY > 800); }, { passive: true });
+  var toTop = $('toTop');
+  if (toTop) addEventListener('scroll', function () { toTop.classList.toggle('show', scrollY > 800); }, { passive: true });
 
   // ---- Data: notices & pride wall ----
-  var notices = null, pride = null;
+  var notices = null, pride = null, gallery = null, stories = null, temple = null;
+  function renderAll() { renderNotices(); renderPride(); renderGallery(); renderStories(); renderTemple(); }
   var T = {
     noNotices: { hi: 'अभी कोई सूचना नहीं है। नई सूचना <code>data/notices.json</code> में जोड़ें।', en: 'No notices yet. Add one in <code>data/notices.json</code>.' },
-    noPride: { hi: 'अभी कोई नाम नहीं जोड़ा गया है। अनुमति के साथ नाम सुझाने के लिए <a href="#contribute">योगदान</a> देखें।', en: 'No names added yet. To suggest someone (with their consent), see <a href="#contribute">Contribute</a>.' },
+    noPride: { hi: 'अभी कोई नाम नहीं जोड़ा गया है। अनुमति के साथ नाम सुझाने के लिए <a href="contribute.html">योगदान</a> देखें।', en: 'No names added yet. To suggest someone (with their consent), see <a href="contribute.html">Contribute</a>.' },
     offline: { hi: 'यह हिस्सा तभी दिखेगा जब वेबसाइट इंटरनेट पर (GitHub Pages पर) खुलेगी।', en: 'This part appears once the site is opened from the web (e.g. GitHub Pages).' },
-    past: { hi: 'बीत चुका', en: 'Past' }
+    past: { hi: 'बीत चुका', en: 'Past' },
+    noPhotos: { hi: 'अभी कोई फ़ोटो नहीं जोड़ी गई है। इंटरनेट पर पडरी कलाँ की कोई मुक्त-लाइसेंस वाली फ़ोटो नहीं मिली, इसलिए गाँव के लोगों की अपनी फ़ोटो का इंतज़ार है। नीचे इच्छा-सूची देखें।', en: 'No photos yet. No freely licensed photos of Padri Kalan were found online, so this gallery waits for photos taken by villagers. See the wishlist below.' },
+    noStories: { hi: 'पहली कहानी आपकी हो सकती है। <a href="contribute.html">कहानी भेजें</a>।', en: 'The first story could be yours. <a href="contribute.html">Send a story</a>.' },
+    toldBy: { hi: 'कहने वाले: ', en: 'Told by: ' },
+    photo: { hi: 'फ़ोटो: ', en: 'Photo: ' }
   };
   function t(k) { return T[k][lang()]; }
 
@@ -78,12 +85,13 @@
   }
 
   function renderNotices() {
-    var box = document.getElementById('noticeList');
+    var box = $('noticeList'); if (!box) return;
     if (notices === 'error') { box.innerHTML = '<div class="empty">' + t('offline') + '</div>'; return; }
     if (!notices) return;
     if (!notices.length) { box.innerHTML = '<div class="empty">' + t('noNotices') + '</div>'; return; }
     var today = new Date().toISOString().slice(0, 10);
     var list = notices.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+    var limit = parseInt(box.getAttribute('data-limit'), 10); if (limit > 0) list = list.slice(0, limit);
     box.innerHTML = list.map(function (n) {
       var past = n.date && n.date < today;
       return '<article class="card notice">' +
@@ -96,7 +104,7 @@
   }
 
   function renderPride() {
-    var box = document.getElementById('prideList');
+    var box = $('prideList'); if (!box) return;
     if (pride === 'error') { box.innerHTML = '<div class="empty">' + t('offline') + '</div>'; return; }
     if (!pride) return;
     var list = pride.filter(function (p) { return p.consent === true; }); // only consented entries are ever shown
@@ -111,13 +119,55 @@
     }).join('');
   }
 
+  function renderGallery() {
+    var box = $('galleryList'); if (!box) return;
+    if (gallery === 'error') { box.innerHTML = '<div class="empty">' + t('offline') + '</div>'; return; }
+    if (!gallery) return;
+    // Only show photos with a licence and permission recorded
+    var list = gallery.filter(function (g) { return g.src && g.license && g.permission === true; });
+    if (!list.length) { box.innerHTML = '<div class="empty">' + t('noPhotos') + '</div>'; return; }
+    box.innerHTML = list.map(function (g) {
+      var lic = g.licenseUrl ? '<a href="' + esc(g.licenseUrl) + '" rel="noopener">' + esc(g.license) + '</a>' : esc(g.license);
+      var by = g.sourceUrl ? '<a href="' + esc(g.sourceUrl) + '" rel="noopener">' + esc(g.credit || '') + '</a>' : esc(g.credit || '');
+      return '<figure><img src="' + esc(g.src) + '" alt="' + esc(pick(g, 'caption')) + '" loading="lazy" decoding="async">' +
+        '<figcaption>' + esc(pick(g, 'caption')) + '<span class="credit">' + t('photo') + by + ' · ' + lic + '</span></figcaption></figure>';
+    }).join('');
+  }
+
+  function renderStories() {
+    var box = $('storyList'); if (!box) return;
+    if (stories === 'error') { box.innerHTML = '<div class="empty">' + t('offline') + '</div>'; return; }
+    if (!stories) return;
+    var list = stories.filter(function (s) { return s.permission === true; });
+    if (!list.length) { box.innerHTML = '<div class="empty">' + t('noStories') + '</div>'; return; }
+    box.innerHTML = list.map(function (s) {
+      var paras = String(pick(s, 'body')).split(/\n\s*\n/).map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
+      return '<article class="card">' + (s.topic ? '<span class="tag">' + esc(pick(s, 'topic')) + '</span>' : '') +
+        '<h3>' + esc(pick(s, 'title')) + '</h3>' + paras +
+        (s.teller ? '<p class="small muted">' + t('toldBy') + esc(pick(s, 'teller')) + (s.date ? ' · ' + esc(s.date) : '') + '</p>' : '') +
+        '</article>';
+    }).join('');
+  }
+
+  function renderTemple() {
+    var box = $('templeInfo');
+    if (!box || !temple || temple === 'error') return;
+    var list = temple.filter(function (f) { return f.confirmed === true; });
+    box.innerHTML = list.length ? '<ul class="facts-list">' + list.map(function (f) {
+      return '<li><strong>' + esc(pick(f, 'label')) + ':</strong> ' + esc(pick(f, 'value')) + (f.source ? ' <cite class="src">(' + esc(f.source) + ')</cite>' : '') + '</li>';
+    }).join('') + '</ul>' : '';
+  }
+
   function load(url, cb) {
     fetch(url, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); })
       .then(function (d) { cb(Array.isArray(d) ? d : (d.items || [])); })
       .catch(function () { cb('error'); });
   }
-  load('data/notices.json', function (d) { notices = d; renderNotices(); });
-  load('data/pride.json', function (d) { pride = d; renderPride(); });
+  if ($('noticeList')) load('data/notices.json', function (d) { notices = d; renderNotices(); });
+  if ($('prideList')) load('data/pride.json', function (d) { pride = d; renderPride(); });
+  if ($('galleryList')) load('data/gallery.json', function (d) { gallery = d; renderGallery(); });
+  if ($('storyList')) load('data/stories.json', function (d) { stories = d; renderStories(); });
+  if ($('templeInfo')) load('data/temple.json', function (d) { temple = d; renderTemple(); });
 
   // ---- Offline support (service worker) ----
   if ('serviceWorker' in navigator && location.protocol === 'https:') {
