@@ -228,6 +228,22 @@ details summary { cursor: pointer; }
 .notice time { color: var(--accent); font-size: .85rem; font-weight: 600; }
 .empty { border: 2px dashed var(--line); border-radius: var(--radius); padding: 18px; color: var(--muted); background: var(--surface); }
 
+/* Suggestion form */
+.form { display: grid; gap: 6px; }
+.form label { font-weight: 600; margin-top: 8px; }
+.form input[type=text], .form select, .form textarea { width: 100%; font: inherit; font-size: 16px; color: var(--text); background: var(--bg); border: 1.5px solid var(--line); border-radius: 12px; padding: 11px 12px; }
+.form textarea { resize: vertical; min-height: 140px; }
+.form input:focus, .form select:focus, .form textarea:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 20%, transparent); }
+.form .hint { margin: 0; font-size: .82rem; color: var(--muted); }
+.form .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: .92rem; margin-top: 12px; }
+.form .check input { width: 22px; height: 22px; flex: none; margin-top: 2px; accent-color: var(--brand); }
+.form .btn { margin-top: 10px; width: 100%; font-size: 1.05rem; }
+.form .btn:disabled { opacity: .6; cursor: wait; }
+.form-status { margin: 4px 0 0; font-weight: 600; min-height: 1.4em; }
+.form-status.good { color: var(--brand); }
+.form-status.err { color: #c23b3b; }
+.hp { position: absolute !important; left: -9999px; opacity: 0; }
+
 /* Callouts and CTAs */
 .callout { background: var(--warn-bg); border: 1px solid var(--warn-line); border-radius: var(--radius); padding: 14px 16px; }
 .cta { display: flex; gap: 10px; flex-wrap: wrap; }

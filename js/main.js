@@ -37,20 +37,50 @@
   });
   if (nav) nav.addEventListener('click', function (e) { if (e.target.closest('a')) { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); } });
 
-  // ---- Share ----
-  on('shareBtn', 'click', function () {
-    var text = (cfg.shareText && cfg.shareText[lang()]) || 'Padri Kalan';
-    var url = location.href.split('#')[0];
-    if (navigator.share) { navigator.share({ title: document.title, text: text, url: url }).catch(function () {}); return; }
-    window.open('https://wa.me/?text=' + encodeURIComponent(text + ' ' + url), '_blank', 'noopener');
-  });
-
   // ---- Contribute links ----
-  var repoUrl = 'https://github.com/' + (cfg.githubUser || '') + '/' + (cfg.githubRepo || '');
-  var configured = cfg.githubUser && cfg.githubUser.indexOf('YOUR-') !== 0;
-  var issueUrl = configured ? repoUrl + '/issues/new/choose' : 'https://github.com/';
-  if ($('issueLink')) $('issueLink').href = issueUrl;
-  if ($('contribLink')) $('contribLink').href = cfg.contributeFormUrl || issueUrl;
+
+  // ---- Suggestion form (no account needed; filed as a private GitHub issue via the relay) ----
+  var form = $('suggestForm');
+  if (form) {
+    var status = $('f-status'), sendBtn = $('f-send');
+    var M = {
+      noMsg: { hi: 'कृपया अपना संदेश लिखें।', en: 'Please write your message.' },
+      noConsent: { hi: 'कृपया सहमति वाले बॉक्स पर निशान लगाएँ।', en: 'Please tick the consent box.' },
+      sending: { hi: 'भेजा जा रहा है…', en: 'Sending…' },
+      ok: { hi: '✅ धन्यवाद! आपका संदेश वेबसाइट टीम तक पहुँच गया है।', en: '✅ Thank you! Your message has reached the website team.' },
+      fail: { hi: '❌ संदेश नहीं जा सका। इंटरनेट जाँचकर दोबारा कोशिश करें।', en: '❌ The message could not be sent. Check your internet and try again.' },
+      notSetup: { hi: 'फ़ॉर्म अभी चालू नहीं हुआ है। कृपया कुछ दिन बाद कोशिश करें।', en: 'The form is not switched on yet. Please try again in a few days.' }
+    };
+    var say = function (k, cls) { status.textContent = M[k][lang()]; status.className = 'form-status ' + (cls || ''); };
+    if (cfg.contactEmail) { var pe = $('photoEmail'); if (pe) { pe.hidden = false; var a = pe.querySelector('a'); a.href = 'mailto:' + cfg.contactEmail; a.textContent = cfg.contactEmail; } }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var msg = form.message.value.trim();
+      if (!msg) { say('noMsg', 'err'); form.message.focus(); return; }
+      if (!form.consent.checked) { say('noConsent', 'err'); return; }
+      if (form.botcheck.checked) return;
+      var payload = {
+        type: form.type.value, message: msg,
+        name: form.name.value.trim(), contact: form.contact.value.trim(),
+        consent: 'yes', lang: lang()
+      };
+      var url, body;
+      if (cfg.suggestionsUrl) { // GitHub relay (see worker/SETUP.md)
+        url = cfg.suggestionsUrl; body = payload;
+      } else if (cfg.web3formsKey) { // email fallback
+        url = 'https://api.web3forms.com/submit';
+        body = { access_key: cfg.web3formsKey, subject: 'Padri Kalan website: ' + payload.type, from_name: 'Padri Kalan website',
+          type: payload.type, message: msg, name: payload.name || '(not given)', contact: payload.contact || '(not given)', consent: 'yes', page_language: payload.lang };
+      } else if (cfg.contributeFormUrl) { window.open(cfg.contributeFormUrl, '_blank', 'noopener'); return; }
+      else { say('notSetup', 'err'); return; }
+      sendBtn.disabled = true; say('sending');
+      fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.success) { form.reset(); say('ok', 'good'); } else { say('fail', 'err'); } })
+        .catch(function () { say('fail', 'err'); })
+        .then(function () { sendBtn.disabled = false; });
+    });
+  }
 
   // ---- Bars animate on view ----
   var fills = document.querySelectorAll('.fill[data-w]');

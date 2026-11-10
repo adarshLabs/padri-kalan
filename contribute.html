@@ -71,32 +71,54 @@
 </section>
 <section class="block" id="contribute">
   <div class="wrap">
-    <h2><span lang="hi">इस वेबसाइट में योगदान दें</span><span lang="en">Help build this website</span></h2>
+    <h2><span lang="hi">सुझाव या जानकारी भेजें</span><span lang="en">Send a suggestion or information</span></h2>
+    <p class="intro"><span lang="hi">यह वेबसाइट पूरे गाँव की है। नीचे का फ़ॉर्म भरें और "भेजें" दबाएँ। कोई खाता, लॉग-इन या ऐप नहीं चाहिए। हिन्दी या अंग्रेज़ी, किसी भी भाषा में लिखें।</span><span lang="en">This website belongs to the whole village. Fill in the form below and press "Send". No account, login or app needed. Write in Hindi or English.</span></p>
     <div class="grid g2">
-      <div>
-        <p lang="hi">यह वेबसाइट पूरे गाँव की है। आप ये चीज़ें भेज सकते हैं:</p>
-        <p lang="en">This website belongs to the whole village. You can send:</p>
-        <ul>
-          <li><span lang="hi">गाँव का इतिहास, बुज़ुर्गों की कहानियाँ, लोकगीत</span><span lang="en">Village history, elders' stories, folk songs</span></li>
-          <li><span lang="hi">मंदिर, तालाब, स्कूल, बाज़ार की जानकारी</span><span lang="en">Details of temples, ponds, schools, markets</span></li>
-          <li><span lang="hi">अपनी खींची हुई फ़ोटो (सार्वजनिक जगहों की)</span><span lang="en">Photos you took yourself (of public places)</span></li>
-          <li><span lang="hi">ग्राम सभा या शिविर की सूचना</span><span lang="en">Gram Sabha or camp notices</span></li>
-          <li><span lang="hi">कोई ग़लती जो आपको दिखे</span><span lang="en">Any mistake you spot</span></li>
-        </ul>
-        <div class="cta">
-          <a class="btn primary" id="contribLink" href="#" rel="noopener" target="_blank"><span lang="hi">जानकारी भेजें</span><span lang="en">Send information</span></a>
-          <a class="btn" id="issueLink" href="#" rel="noopener" target="_blank"><span lang="hi">ग़लती बताएँ (GitHub)</span><span lang="en">Report a correction (GitHub)</span></a>
+      <form class="card form" id="suggestForm" novalidate>
+        <label for="f-type"><span lang="hi">आप क्या भेजना चाहते हैं?</span><span lang="en">What would you like to send?</span></label>
+        <select id="f-type" name="type">
+          <option value="Suggestion / सुझाव">सुझाव · Suggestion</option>
+          <option value="Correction / सुधार">ग़लती का सुधार · Correction</option>
+          <option value="History or story / इतिहास या कहानी">गाँव का इतिहास या कहानी · History or story</option>
+          <option value="Baleshwari Mandir / बालेश्वरी मंदिर">बालेश्वरी मंदिर की जानकारी · Temple details</option>
+          <option value="Notice or event / सूचना">सूचना या कार्यक्रम · Notice or event</option>
+          <option value="Other / अन्य">अन्य · Other</option>
+        </select>
+
+        <label for="f-msg"><span lang="hi">आपका संदेश *</span><span lang="en">Your message *</span></label>
+        <textarea id="f-msg" name="message" rows="6" required maxlength="4000" placeholder="यहाँ लिखें… / Write here…"></textarea>
+
+        <label for="f-name"><span lang="hi">आपका नाम (ज़रूरी नहीं)</span><span lang="en">Your name (optional)</span></label>
+        <input id="f-name" name="name" type="text" maxlength="80" autocomplete="name">
+
+        <label for="f-contact"><span lang="hi">फ़ोन या ईमेल (ज़रूरी नहीं)</span><span lang="en">Phone or email (optional)</span></label>
+        <input id="f-contact" name="contact" type="text" maxlength="120" inputmode="email" autocomplete="email">
+        <p class="hint"><span lang="hi">सिर्फ़ आपसे संपर्क करने के लिए। यह कभी वेबसाइट पर नहीं छपेगा।</span><span lang="en">Only so we can reply to you. It is never published.</span></p>
+
+        <label class="check"><input type="checkbox" id="f-consent" name="consent" required>
+          <span><span lang="hi">मैं सहमति देता/देती हूँ कि मेरा संदेश (मेरे फ़ोन/ईमेल के बिना) वेबसाइट पर इस्तेमाल किया जा सकता है।</span><span lang="en">I agree that my message (without my phone or email) may be used on the website.</span></span></label>
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <button class="btn primary" type="submit" id="f-send"><span lang="hi">भेजें</span><span lang="en">Send</span></button>
+        <p class="form-status" id="f-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="grid" style="align-content:start">
+        <div class="card" id="photoBox">
+          <h3>📷 <span lang="hi">फ़ोटो कैसे भेजें?</span><span lang="en">How to send photos?</span></h3>
+          <p lang="hi">फ़ॉर्म में बस लिख दें कि आपके पास फ़ोटो है, और अपना फ़ोन नंबर दें। वेबसाइट टीम आपसे संपर्क करके फ़ोटो ले लेगी।</p>
+          <p lang="en">Just mention in the form that you have photos and leave your phone number. The website team will contact you to collect them.</p>
+          <p id="photoEmail" hidden><span lang="hi">या फ़ोटो सीधे ईमेल करें:</span><span lang="en">Or email the photos directly:</span> <a href="#"></a></p>
         </div>
-      </div>
-      <div class="callout">
-        <h3><span lang="hi">फ़ोटो और जानकारी के नियम</span><span lang="en">Rules for photos and information</span></h3>
-        <ul>
-          <li><span lang="hi">केवल वही फ़ोटो जो आपने ख़ुद ली है, या जिसकी मालिक ने अनुमति दी है।</span><span lang="en">Only photos you took yourself, or that the owner allowed.</span></li>
-          <li><span lang="hi">लोगों की फ़ोटो उनकी अनुमति के बिना नहीं। बच्चों की फ़ोटो माता-पिता की अनुमति से ही।</span><span lang="en">No photos of people without their consent. Children only with a parent's consent.</span></li>
-          <li><span lang="hi">कोई निजी जानकारी नहीं: फ़ोन नंबर, आधार, ज़मीन का विवरण, जाति।</span><span lang="en">No personal data: phone numbers, Aadhaar, land details, caste.</span></li>
-          <li><span lang="hi">कोई राजनीति, प्रचार या किसी व्यक्ति के ख़िलाफ़ बात नहीं।</span><span lang="en">No politics, campaigning, or content against any person.</span></li>
-          <li><span lang="hi">हर तथ्य के साथ उसका स्रोत।</span><span lang="en">Every fact with its source.</span></li>
-        </ul>
+        <div class="callout">
+          <h3><span lang="hi">फ़ोटो और जानकारी के नियम</span><span lang="en">Rules for photos and information</span></h3>
+          <ul>
+            <li><span lang="hi">केवल वही फ़ोटो जो आपने ख़ुद ली है, या जिसकी मालिक ने अनुमति दी है।</span><span lang="en">Only photos you took yourself, or that the owner allowed.</span></li>
+            <li><span lang="hi">लोगों की फ़ोटो उनकी अनुमति के बिना नहीं। बच्चों की फ़ोटो माता-पिता की अनुमति से ही।</span><span lang="en">No photos of people without their consent. Children only with a parent's consent.</span></li>
+            <li><span lang="hi">संदेश में किसी और की निजी जानकारी न लिखें: फ़ोन नंबर, आधार, ज़मीन का विवरण, जाति।</span><span lang="en">Don't include anyone else's personal data: phone numbers, Aadhaar, land details, caste.</span></li>
+            <li><span lang="hi">कोई राजनीति, प्रचार या किसी व्यक्ति के ख़िलाफ़ बात नहीं।</span><span lang="en">No politics, campaigning, or content against any person.</span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -112,8 +134,8 @@
       </div>
       <div class="card">
         <h3><span lang="hi">गोपनीयता</span><span lang="en">Privacy</span></h3>
-        <p lang="hi">यह वेबसाइट कोई कुकी, ट्रैकिंग या विज्ञापन इस्तेमाल नहीं करती और आपसे कोई निजी जानकारी नहीं लेती। आपकी चुनी हुई भाषा और रंग-थीम सिर्फ़ आपके अपने फ़ोन/कंप्यूटर में सहेजी जाती है।</p>
-        <p lang="en">This website uses no cookies, tracking or ads, and collects no personal information. Your chosen language and colour theme are saved only on your own phone or computer.</p>
+        <p lang="hi">यह वेबसाइट कोई कुकी, ट्रैकिंग या विज्ञापन इस्तेमाल नहीं करती। सुझाव फ़ॉर्म में आप जो लिखते हैं, वह सीधे वेबसाइट टीम के निजी (प्राइवेट) संग्रह में जाता है, जिसे कोई और नहीं देख सकता। आपका फ़ोन या ईमेल कभी प्रकाशित नहीं होता, और माँगने पर हटा दिया जाता है। भाषा और रंग-थीम की पसंद सिर्फ़ आपके अपने फ़ोन में सहेजी जाती है।</p>
+        <p lang="en">This website uses no cookies, tracking or ads. What you write in the suggestion form goes straight to the website team's private inbox, which no one else can see. Your phone or email is never published and is deleted on request. Your language and theme choice are saved only on your own phone.</p>
         <p class="small muted" lang="hi">किसी सामग्री पर आपत्ति हो तो <a href="#contribute">संपर्क करें</a>; उसे जल्द हटाया जाएगा।</p>
         <p class="small muted" lang="en">If you object to any content, <a href="#contribute">contact us</a> and it will be removed promptly.</p>
       </div>

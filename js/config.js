@@ -7,13 +7,18 @@ window.SITE_CONFIG = {
   githubUser: "adarshlabs",
   githubRepo: "padri-kalan",
 
-  // Optional: a free Google Form link where villagers can send stories/photos/notices.
-  // Leave empty ("") to fall back to GitHub Issues.
-  contributeFormUrl: "",
+  // SUGGESTION FORM (villagers need no account).
+  // Paste your Cloudflare Worker address here, e.g. "https://padri-kalan-form.yourname.workers.dev".
+  // Each message then becomes an issue in your PRIVATE GitHub repo. Setup: worker/SETUP.md
+  suggestionsUrl: "padri-kalan-form.adarshlabs.workers.dev",
 
-  // Text used by the "Share on WhatsApp" button
-  shareText: {
-    hi: "पडरी कलाँ गाँव की सामुदायिक वेबसाइट देखें:",
-    en: "See the community website of Padri Kalan village:"
-  }
+  // Alternative (not used if suggestionsUrl is set): a Web3Forms key, which sends messages by email.
+  web3formsKey: "",
+
+  // Optional: an email shown on the Contribute page for sending photos. Leave "" to hide it.
+  // Note: whatever you put here is public on the website.
+  contactEmail: "",
+
+  // Optional fallback: a Google Form link, used only if web3formsKey is empty.
+  contributeFormUrl: ""
 };

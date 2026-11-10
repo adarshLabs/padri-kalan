@@ -27,7 +27,7 @@ The site has seven pages: `index.html` (home: welcome, page cards, latest 3 noti
 | Contribute | How villagers can send stories, photos and corrections, and the rules for doing so |
 | Disclaimer | Community-run notice, privacy note and the full source list |
 
-Other features: a Hindi/English toggle (remembered per phone), dark mode, a WhatsApp share button, a printable layout, offline support (installable to the home screen), GitHub issue templates for corrections, and no cookies.
+Other features: a Hindi/English toggle (remembered per phone), dark mode, a printable layout, offline support (installable to the home screen), GitHub issue templates for corrections, and no cookies.
 
 ### Where the ideas came from
 
@@ -54,7 +54,7 @@ Open `js/config.js` and change:
 githubUser: "YOUR-GITHUB-USERNAME",
 githubRepo: "padri-kalan",
 ```
-This makes the "Report a correction" button open your repo's issue page.
+This is kept for your own reference; villagers never see GitHub.
 
 ### Step 3: Upload the files
 **Option A, in the browser (easiest):**
@@ -128,8 +128,14 @@ python3 -m http.server 8000
 ```
 Then open <http://localhost:8000>. (Opening `index.html` directly works too, but notices load only from a server.)
 
-### Collecting stories without GitHub
-Most villagers won't use GitHub. Make a free Google Form (name, story, photo upload, consent tickbox), then paste its link into `contributeFormUrl` in `js/config.js`. The "Send information" button will open it.
+### Turn on the suggestion form (15 minutes, free, once)
+Villagers send suggestions from the form on the Contribute page. They need no account, login or app. Each message becomes an issue in a **private** GitHub repo, so your Gmail stays clean. A small free Cloudflare relay holds the GitHub key, so it's never in the website's code.
+
+Follow **[worker/SETUP.md](worker/SETUP.md)**. Until it's set up, the form politely says it isn't switched on yet.
+
+(Alternative: paste a free Web3Forms key into `web3formsKey` to receive messages by email instead.)
+
+**Photos:** the form asks people to mention they have photos and leave a phone number, so you or a village volunteer can collect them. If you're happy to make an email address public, put it in `contactEmail` and the page will show it for sending photos.
 
 ---
 
@@ -174,6 +180,7 @@ padri-kalan-website/
 ├── manifest.webmanifest    lets people "Add to Home screen"
 ├── sw.js                   offline support
 ├── robots.txt, .nojekyll   hosting helpers
+├── worker/                 free Cloudflare relay: form → private GitHub issues (see SETUP.md)
 ├── _github/ISSUE_TEMPLATE/ correction and contribution forms (rename to .github)
 ├── LICENSE                 MIT (code) + CC BY-SA 4.0 (text)
 └── SOURCES.md              every fact and where it came from
