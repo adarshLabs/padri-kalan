@@ -66,7 +66,9 @@
       };
       var url, body;
       if (cfg.suggestionsUrl) { // GitHub relay (see worker/SETUP.md)
-        url = cfg.suggestionsUrl; body = payload;
+        url = String(cfg.suggestionsUrl).trim();
+        if (!/^https?:\/\//i.test(url)) url = 'https://' + url.replace(/^\/+/, ''); // tolerate a missing https://
+        body = payload;
       } else if (cfg.web3formsKey) { // email fallback
         url = 'https://api.web3forms.com/submit';
         body = { access_key: cfg.web3formsKey, subject: 'Padri Kalan website: ' + payload.type, from_name: 'Padri Kalan website',
@@ -75,8 +77,11 @@
       else { say('notSetup', 'err'); return; }
       sendBtn.disabled = true; say('sending');
       fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) })
-        .then(function (r) { return r.json(); })
-        .then(function (d) { if (d && d.success) { form.reset(); say('ok', 'good'); } else { say('fail', 'err'); } })
+        .then(function (r) { return r.json().catch(function () { return { success: false, error: 'HTTP ' + r.status }; }); })
+        .then(function (d) {
+          if (d && d.success) { form.reset(); say('ok', 'good'); }
+          else { say('fail', 'err'); if (window.console) console.warn('Suggestion form:', d && d.error); }
+        })
         .catch(function () { say('fail', 'err'); })
         .then(function () { sendBtn.disabled = false; });
     });

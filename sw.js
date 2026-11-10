@@ -1,6 +1,6 @@
 // Offline cache so the site opens even with weak or no network.
 // Bump VERSION whenever you change files, so phones fetch the new copy.
-var VERSION = 'pk-v7';
+var VERSION = 'pk-v8';
 var FILES = ['./', 'index.html', 'about.html', 'temple.html', 'gallery.html', 'services.html', 'notices.html', 'contribute.html', 'css/style.css', 'js/config.js', 'js/main.js',
   'data/notices.json', 'data/pride.json', 'data/gallery.json', 'data/stories.json', 'data/temple.json', 'assets/icon.svg', 'manifest.webmanifest', '404.html'];
 self.addEventListener('install', function (e) {

@@ -10,7 +10,7 @@ window.SITE_CONFIG = {
   // SUGGESTION FORM (villagers need no account).
   // Paste your Cloudflare Worker address here, e.g. "https://padri-kalan-form.yourname.workers.dev".
   // Each message then becomes an issue in your PRIVATE GitHub repo. Setup: worker/SETUP.md
-  suggestionsUrl: "padri-kalan-form.adarshlabs.workers.dev",
+  suggestionsUrl: "https://padri-kalan-form.adarshlabs.workers.dev",
 
   // Alternative (not used if suggestionsUrl is set): a Web3Forms key, which sends messages by email.
   web3formsKey: "",
