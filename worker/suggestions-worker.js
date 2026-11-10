@@ -145,7 +145,10 @@ async function handleUpload(request, env, cors, url) {
   })();
   const put = gh(env, '/contents/' + path.split('/').map(encodeURIComponent).join('/'), { method: 'PUT', body: readable });
   const [, r] = await Promise.all([pump.catch(e => e), put]);
-  if (!r.ok) return json({ success: false, error: 'GitHub refused file (' + r.status + ')' }, 502, cors);
+  if (!r.ok) {
+    let why = ''; try { why = String((await r.json()).message || '').slice(0, 120); } catch (e) {}
+    return json({ success: false, error: 'GitHub refused file (' + r.status + (why ? ': ' + why : '') + ')' }, 502, cors);
+  }
 
   const link = `https://github.com/${env.GITHUB_REPO}/blob/main/${path}`;
   const label = kind === 'photo' ? `📷 Photo ${n}` : `🎬 Video ${n}`;
