@@ -1,5 +1,6 @@
 # Cloudflare reads this file when it deploys the suggestion relay from GitHub.
 # Setup: see worker/SETUP.md, "Update the relay automatically from GitHub".
+# Any push that changes a file in this worker/ folder redeploys the relay.
 name = "padri-kalan-form"            # must match the Worker's name in Cloudflare
 main = "suggestions-worker.js"
 compatibility_date = "2024-09-23"
