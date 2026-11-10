@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261110b">
+<link rel="stylesheet" href="css/style.css?v=20261110d">
 <script>
   // Apply saved language/theme before paint
   try {
@@ -95,8 +95,14 @@
         <input id="f-contact" name="contact" type="text" maxlength="120" inputmode="email" autocomplete="email">
         <p class="hint"><span lang="hi">सिर्फ़ आपसे संपर्क करने के लिए। यह कभी वेबसाइट पर नहीं छपेगा।</span><span lang="en">Only so we can reply to you. It is never published.</span></p>
 
+        <label for="f-files"><span lang="hi">फ़ोटो या वीडियो जोड़ें (ज़रूरी नहीं)</span><span lang="en">Add photos or a video (optional)</span></label>
+        <label class="filepick" for="f-files"><span aria-hidden="true">📎</span> <span lang="hi">फ़ाइल चुनें</span><span lang="en">Choose files</span></label>
+        <input id="f-files" type="file" accept="image/*,video/*" multiple class="visually-hidden">
+        <p class="hint"><span lang="hi">एक संदेश में 5 फ़ाइलें तक · फ़ोटो 10 MB तक (असली क्वालिटी में) · 1 वीडियो, 1 मिनट और 20 MB तक</span><span lang="en">Up to 5 files per message · photos up to 10 MB (sent in original quality) · 1 video, up to 1 minute and 20 MB</span></p>
+        <ul class="filelist" id="f-filelist" aria-live="polite"></ul>
+
         <label class="check"><input type="checkbox" id="f-consent" name="consent" required>
-          <span><span lang="hi">मैं सहमति देता/देती हूँ कि मेरा संदेश (मेरे फ़ोन/ईमेल के बिना) वेबसाइट पर इस्तेमाल किया जा सकता है।</span><span lang="en">I agree that my message (without my phone or email) may be used on the website.</span></span></label>
+          <span><span lang="hi">मैं सहमति देता/देती हूँ कि मेरा संदेश और फ़ोटो/वीडियो (मेरे फ़ोन/ईमेल के बिना) वेबसाइट पर इस्तेमाल किए जा सकते हैं। फ़ोटो/वीडियो मैंने ख़ुद बनाए हैं या मालिक की अनुमति है, और उनमें दिखे लोगों की सहमति है।</span><span lang="en">I agree that my message and photos/videos (without my phone or email) may be used on the website. I took the photos/videos myself or have the owner's permission, and the people shown in them agree.</span></span></label>
         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
         <button class="btn primary" type="submit" id="f-send"><span lang="hi">भेजें</span><span lang="en">Send</span></button>
@@ -106,8 +112,8 @@
       <div class="grid" style="align-content:start">
         <div class="card" id="photoBox">
           <h3>📷 <span lang="hi">फ़ोटो कैसे भेजें?</span><span lang="en">How to send photos?</span></h3>
-          <p lang="hi">फ़ॉर्म में बस लिख दें कि आपके पास फ़ोटो है, और अपना फ़ोन नंबर दें। वेबसाइट टीम आपसे संपर्क करके फ़ोटो ले लेगी।</p>
-          <p lang="en">Just mention in the form that you have photos and leave your phone number. The website team will contact you to collect them.</p>
+          <p lang="hi">फ़ॉर्म में "फ़ाइल चुनें" दबाकर सीधे फ़ोटो या छोटा वीडियो जोड़ें। ज़्यादा फ़ोटो हों तो कई बार भेज सकते हैं। बड़ा वीडियो हो तो संदेश में फ़ोन नंबर छोड़ दें, टीम संपर्क करेगी।</p>
+          <p lang="en">Press "Choose files" in the form to attach photos or a short video. Have more photos? Send another message. For a long video, leave your phone number and the team will contact you.</p>
           <p id="photoEmail" hidden><span lang="hi">या फ़ोटो सीधे ईमेल करें:</span><span lang="en">Or email the photos directly:</span> <a href="#"></a></p>
         </div>
         <div class="callout">
@@ -193,7 +199,7 @@
   <a href="notices.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10zM17 9a4 4 0 0 1 0 6"/></svg><span lang="hi">सूचनाएँ</span><span lang="en">Notices</span></a>
 </nav>
 <a class="btn" id="toTop" href="#top" aria-label="Back to top">↑</a>
-<script src="js/config.js?v=20261110b"></script>
-<script src="js/main.js?v=20261110b"></script>
+<script src="js/config.js?v=20261110d"></script>
+<script src="js/main.js?v=20261110d"></script>
 </body>
 </html>

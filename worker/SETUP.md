@@ -9,6 +9,25 @@ Everything here is free. It takes about 15 minutes, once.
 
 ---
 
+## Already set up? Turn on photos and videos (5 minutes)
+
+**A. Let the key save files (2 min)**
+1. GitHub → your photo (top right) → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens**.
+2. Click your token **padri-kalan-form**.
+3. Click **Edit**, scroll to **Repository permissions**, and set **Contents** to **Read and write** (leave **Issues** on Read and write).
+4. Click **Update** at the bottom. The token text stays the same, so you don't need to change anything in Cloudflare.
+
+**B. Put the new relay code on Cloudflare (2 min)**
+1. Cloudflare → **Workers & Pages** → **padri-kalan-form** → **Edit code**.
+2. Select everything in the editor and delete it.
+3. Open `worker/suggestions-worker.js` from this folder, copy all of it, and paste it in.
+4. Click **Deploy**.
+
+**C. Push the website and test (1 min)**
+Push the website changes, open the Contribute page on your phone, attach a photo, and send. The issue should show the message, then one comment per photo or video, with the photo shown inside the comment.
+
+---
+
 ## Step 1: Make a private repo to hold the messages (2 min)
 
 1. On GitHub, click **+** → **New repository**.
@@ -21,7 +40,7 @@ Everything here is free. It takes about 15 minutes, once.
 1. GitHub → your photo (top right) → **Settings** → **Developer settings** (bottom left) → **Personal access tokens** → **Fine-grained tokens** → **Generate new token**.
 2. Token name: `padri-kalan-form`. Expiration: **1 year**. Set a phone reminder to renew it.
 3. Repository access: **Only select repositories** → pick `padri-kalan-suggestions`.
-4. Permissions → Repository permissions → **Issues** → **Read and write**. Leave everything else at "No access".
+4. Permissions → Repository permissions → **Issues** → **Read and write**, and **Contents** → **Read and write** (Contents lets the form save photos and videos). Leave everything else at "No access".
 5. Click **Generate token** and copy it (it starts with `github_pat_`). You'll only see it once.
 
 ## Step 3: Create the free relay on Cloudflare (7 min)
@@ -66,7 +85,9 @@ git add -A && git commit -m "Connect suggestion form" && git push
 
 ## Limits and safety
 
+- **Attachment limits:** up to 5 files per message; photos up to 10 MB each, saved as the original file with no loss of quality; 1 video per message, up to 1 minute and 20 MB. Allowed types are JPG, PNG, WEBP and HEIC for photos, and MP4, MOV, 3GP and WEBM for videos.
+- Files are saved in your private repo under `uploads/issue-<number>/`. GitHub keeps repos healthy up to about 1 GB, which is roughly 50 full-size videos plus thousands of photos. Once you've copied a video somewhere else, delete it from the repo to free space.
 - Cloudflare's free plan allows 100,000 requests a day, far more than a village needs.
 - The relay only accepts messages from your website's address, drops obvious bots, and allows at most 10 messages an hour from one connection.
-- The token can only create and read issues in that one private repo. If it ever leaks, delete it on GitHub and make a new one.
+- The token can only work with issues and files in that one private repo. If it ever leaks, delete it on GitHub and make a new one.
 - If the form shows "could not be sent", check that the token hasn't expired (Step 2) and that `ALLOWED_ORIGINS` matches your site's address exactly.

@@ -40,50 +40,147 @@
   // ---- Contribute links ----
 
   // ---- Suggestion form (no account needed; filed as a private GitHub issue via the relay) ----
+  // Attachment limits (common practice for community forms):
+  //   up to 5 files per message; photos up to 10 MB each, sent as the original file (no compression);
+  //   at most 1 video, up to 20 MB and 1 minute.
+  var FILE_LIMITS = { maxFiles: 5, photoMB: 10, videoMB: 20, videoSeconds: 60, maxVideos: 1 };
   var form = $('suggestForm');
   if (form) {
-    var status = $('f-status'), sendBtn = $('f-send');
+    var status = $('f-status'), sendBtn = $('f-send'), fileInput = $('f-files'), fileList = $('f-filelist');
+    var picked = []; // { file, kind, seconds }
     var M = {
       noMsg: { hi: 'कृपया अपना संदेश लिखें।', en: 'Please write your message.' },
       noConsent: { hi: 'कृपया सहमति वाले बॉक्स पर निशान लगाएँ।', en: 'Please tick the consent box.' },
-      sending: { hi: 'भेजा जा रहा है…', en: 'Sending…' },
+      sending: { hi: 'संदेश भेजा जा रहा है…', en: 'Sending your message…' },
       ok: { hi: '✅ धन्यवाद! आपका संदेश वेबसाइट टीम तक पहुँच गया है।', en: '✅ Thank you! Your message has reached the website team.' },
+      okFiles: { hi: '✅ धन्यवाद! आपका संदेश और सभी फ़ाइलें पहुँच गई हैं।', en: '✅ Thank you! Your message and all files have arrived.' },
+      partFiles: { hi: '⚠️ संदेश पहुँच गया, पर कुछ फ़ाइलें नहीं जा सकीं। अच्छे नेटवर्क में दोबारा भेजें।', en: '⚠️ Your message arrived, but some files could not be sent. Try again on a better network.' },
       fail: { hi: '❌ संदेश नहीं जा सका। इंटरनेट जाँचकर दोबारा कोशिश करें।', en: '❌ The message could not be sent. Check your internet and try again.' },
-      notSetup: { hi: 'फ़ॉर्म अभी चालू नहीं हुआ है। कृपया कुछ दिन बाद कोशिश करें।', en: 'The form is not switched on yet. Please try again in a few days.' }
+      notSetup: { hi: 'फ़ॉर्म अभी चालू नहीं हुआ है। कृपया कुछ दिन बाद कोशिश करें।', en: 'The form is not switched on yet. Please try again in a few days.' },
+      tooMany: { hi: 'एक बार में अधिकतम 5 फ़ाइलें।', en: 'At most 5 files per message.' },
+      oneVideo: { hi: 'एक संदेश में सिर्फ़ 1 वीडियो।', en: 'Only 1 video per message.' },
+      bigPhoto: { hi: 'फ़ोटो 10 MB से बड़ी है।', en: 'Photo is larger than 10 MB.' },
+      bigVideo: { hi: 'वीडियो 20 MB से बड़ा है। छोटा वीडियो भेजें।', en: 'Video is larger than 20 MB. Please send a shorter one.' },
+      longVideo: { hi: 'वीडियो 1 मिनट से लंबा है।', en: 'Video is longer than 1 minute.' },
+      badType: { hi: 'सिर्फ़ फ़ोटो या वीडियो भेजें।', en: 'Only photos or videos, please.' },
+      noFilesHere: { hi: 'फ़ाइलें भेजने की सुविधा अभी चालू नहीं है; सिर्फ़ संदेश भेजा जाएगा।', en: 'File sending is not switched on yet; only the message will be sent.' },
+      remove: { hi: 'हटाएँ', en: 'Remove' }
     };
-    var say = function (k, cls) { status.textContent = M[k][lang()]; status.className = 'form-status ' + (cls || ''); };
+    var tt = function (k) { return M[k][lang()]; };
+    var say = function (text, cls) { status.textContent = text; status.className = 'form-status ' + (cls || ''); };
     if (cfg.contactEmail) { var pe = $('photoEmail'); if (pe) { pe.hidden = false; var a = pe.querySelector('a'); a.href = 'mailto:' + cfg.contactEmail; a.textContent = cfg.contactEmail; } }
+
+    var relayUrl = function () {
+      var u = String(cfg.suggestionsUrl || '').trim();
+      if (!u) return '';
+      if (!/^https?:\/\//i.test(u)) u = 'https://' + u.replace(/^\/+/, '');
+      return u.replace(/\/+$/, '');
+    };
+    var mb = function (n) { return (n / 1048576).toFixed(n < 1048576 ? 2 : 1) + ' MB'; };
+    var kindOf = function (f) {
+      var ext = (f.name.split('.').pop() || '').toLowerCase();
+      if (/^image\//.test(f.type) || /^(jpe?g|png|webp|heic|heif)$/.test(ext)) return 'photo';
+      if (/^video\//.test(f.type) || /^(mp4|mov|m4v|3gp|webm)$/.test(ext)) return 'video';
+      return null;
+    };
+    var videoSeconds = function (f) {
+      return new Promise(function (res) {
+        var v = document.createElement('video'), url = URL.createObjectURL(f), done = false;
+        var finish = function (s) { if (done) return; done = true; URL.revokeObjectURL(url); res(s); };
+        v.preload = 'metadata'; v.muted = true;
+        v.onloadedmetadata = function () { finish(isFinite(v.duration) ? v.duration : 0); };
+        v.onerror = function () { finish(0); }; // unknown length: the size limit still applies
+        setTimeout(function () { finish(0); }, 8000);
+        v.src = url;
+      });
+    };
+    var renderFiles = function () {
+      fileList.innerHTML = picked.map(function (p, i) {
+        return '<li><span>' + (p.kind === 'photo' ? '📷 ' : '🎬 ') + esc(p.file.name) + ' <small>(' + mb(p.file.size) +
+          (p.seconds ? ', ' + Math.round(p.seconds) + 's' : '') + ')</small></span>' +
+          '<button type="button" class="linkbtn" data-i="' + i + '">' + tt('remove') + '</button></li>';
+      }).join('');
+    };
+    fileList && fileList.addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-i]'); if (!b) return;
+      picked.splice(+b.getAttribute('data-i'), 1); renderFiles();
+    });
+    fileInput && fileInput.addEventListener('change', function () {
+      var files = Array.prototype.slice.call(fileInput.files || []); fileInput.value = '';
+      var errs = [];
+      var next = function () {
+        if (!files.length) { renderFiles(); say(errs.join(' '), errs.length ? 'err' : ''); return; }
+        var f = files.shift(), kind = kindOf(f);
+        if (picked.length >= FILE_LIMITS.maxFiles) { errs.push(tt('tooMany')); files = []; return next(); }
+        if (!kind) { errs.push(tt('badType') + ' (' + f.name + ')'); return next(); }
+        if (kind === 'photo') {
+          if (f.size > FILE_LIMITS.photoMB * 1048576) { errs.push(tt('bigPhoto') + ' (' + f.name + ')'); return next(); }
+          picked.push({ file: f, kind: kind }); return next();
+        }
+        if (picked.filter(function (p) { return p.kind === 'video'; }).length >= FILE_LIMITS.maxVideos) { errs.push(tt('oneVideo')); return next(); }
+        if (f.size > FILE_LIMITS.videoMB * 1048576) { errs.push(tt('bigVideo') + ' (' + mb(f.size) + ')'); return next(); }
+        videoSeconds(f).then(function (s) {
+          if (s > FILE_LIMITS.videoSeconds + 3) errs.push(tt('longVideo') + ' (' + Math.round(s) + 's)');
+          else picked.push({ file: f, kind: kind, seconds: s });
+          next();
+        });
+      };
+      next();
+    });
+
+    var toBase64 = function (blob) {
+      return new Promise(function (res, rej) { var r = new FileReader(); r.onload = function () { res(String(r.result).split(',')[1] || ''); }; r.onerror = rej; r.readAsDataURL(blob); });
+    };
+    var progressText = function (i, n) { return lang() === 'hi' ? ('फ़ाइल ' + i + '/' + n + ' भेजी जा रही है… कृपया पेज बंद न करें।') : ('Sending file ' + i + ' of ' + n + '… please keep this page open.'); };
+    var postJSON = function (url, body) {
+      return fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json().catch(function () { return { success: false, error: 'HTTP ' + r.status }; }); });
+    };
+    var uploadAll = function (base, issue, key) {
+      var ok = 0, i = 0;
+      var step = function () {
+        if (i >= picked.length) return Promise.resolve(ok);
+        var p = picked[i++]; say(progressText(i, picked.length));
+        return Promise.resolve({ blob: p.file, name: p.file.name }) // original file, untouched: no quality loss
+          .then(function (x) { return toBase64(x.blob).then(function (b64) { return { b64: b64, name: x.name }; }); })
+          .then(function (x) {
+            var q = '?issue=' + issue + '&n=' + i + '&size=' + x.b64.length + '&name=' + encodeURIComponent(x.name) + '&key=' + encodeURIComponent(key);
+            return fetch(base + '/upload' + q, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: x.b64 });
+          })
+          .then(function (r) { return r.json().catch(function () { return {}; }); })
+          .then(function (d) { if (d && d.success) ok++; }, function () {})
+          .then(step);
+      };
+      return step();
+    };
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var msg = form.message.value.trim();
-      if (!msg) { say('noMsg', 'err'); form.message.focus(); return; }
-      if (!form.consent.checked) { say('noConsent', 'err'); return; }
+      if (!msg) { say(tt('noMsg'), 'err'); form.message.focus(); return; }
+      if (!form.consent.checked) { say(tt('noConsent'), 'err'); return; }
       if (form.botcheck.checked) return;
-      var payload = {
-        type: form.type.value, message: msg,
-        name: form.name.value.trim(), contact: form.contact.value.trim(),
-        consent: 'yes', lang: lang()
-      };
-      var url, body;
-      if (cfg.suggestionsUrl) { // GitHub relay (see worker/SETUP.md)
-        url = String(cfg.suggestionsUrl).trim();
-        if (!/^https?:\/\//i.test(url)) url = 'https://' + url.replace(/^\/+/, ''); // tolerate a missing https://
-        body = payload;
-      } else if (cfg.web3formsKey) { // email fallback
-        url = 'https://api.web3forms.com/submit';
-        body = { access_key: cfg.web3formsKey, subject: 'Padri Kalan website: ' + payload.type, from_name: 'Padri Kalan website',
-          type: payload.type, message: msg, name: payload.name || '(not given)', contact: payload.contact || '(not given)', consent: 'yes', page_language: payload.lang };
+      var payload = { type: form.type.value, message: msg, name: form.name.value.trim(), contact: form.contact.value.trim(), consent: 'yes', lang: lang(), files: picked.length };
+      var relay = relayUrl(), req;
+      if (relay) req = postJSON(relay, payload);
+      else if (cfg.web3formsKey) {
+        if (picked.length) say(tt('noFilesHere'));
+        req = postJSON('https://api.web3forms.com/submit', { access_key: cfg.web3formsKey, subject: 'Padri Kalan website: ' + payload.type, from_name: 'Padri Kalan website',
+          type: payload.type, message: msg, name: payload.name || '(not given)', contact: payload.contact || '(not given)', consent: 'yes', page_language: payload.lang });
       } else if (cfg.contributeFormUrl) { window.open(cfg.contributeFormUrl, '_blank', 'noopener'); return; }
-      else { say('notSetup', 'err'); return; }
-      sendBtn.disabled = true; say('sending');
-      fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) })
-        .then(function (r) { return r.json().catch(function () { return { success: false, error: 'HTTP ' + r.status }; }); })
-        .then(function (d) {
-          if (d && d.success) { form.reset(); say('ok', 'good'); }
-          else { say('fail', 'err'); if (window.console) console.warn('Suggestion form:', d && d.error); }
-        })
-        .catch(function () { say('fail', 'err'); })
-        .then(function () { sendBtn.disabled = false; });
+      else { say(tt('notSetup'), 'err'); return; }
+
+      sendBtn.disabled = true; if (fileInput) fileInput.disabled = true; say(tt('sending'));
+      req.then(function (d) {
+        if (!d || !d.success) { say(tt('fail'), 'err'); if (window.console) console.warn('Suggestion form:', d && d.error); return; }
+        if (!relay || !picked.length || !d.uploadKey) { form.reset(); picked = []; renderFiles(); say(tt('ok'), 'good'); return; }
+        var total = picked.length;
+        return uploadAll(relay, d.issue, d.uploadKey).then(function (ok) {
+          form.reset(); picked = []; renderFiles();
+          say(ok === total ? tt('okFiles') : tt('partFiles'), ok === total ? 'good' : 'err');
+        });
+      }).catch(function () { say(tt('fail'), 'err'); })
+        .then(function () { sendBtn.disabled = false; if (fileInput) fileInput.disabled = false; });
     });
   }
 

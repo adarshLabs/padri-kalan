@@ -243,6 +243,13 @@ details summary { cursor: pointer; }
 .form-status.good { color: var(--brand); }
 .form-status.err { color: #c23b3b; }
 .hp { position: absolute !important; left: -9999px; opacity: 0; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.form .filepick { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 2px; padding: 14px; border: 2px dashed var(--line); border-radius: 14px; background: var(--bg); cursor: pointer; font-weight: 600; color: var(--brand); }
+.form .filepick:hover, #f-files:focus-visible + .hint { border-color: var(--brand); }
+.filelist { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 6px; }
+.filelist li { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 10px; background: var(--surface-2); font-size: .9rem; margin: 0; word-break: break-word; }
+.filelist small { color: var(--muted); }
+.linkbtn { background: none; border: 0; color: #c23b3b; font: inherit; font-size: .85rem; font-weight: 600; cursor: pointer; padding: 6px; flex: none; }
 
 /* Callouts and CTAs */
 .callout { background: var(--warn-bg); border: 1px solid var(--warn-line); border-radius: var(--radius); padding: 14px 16px; }
