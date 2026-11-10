@@ -98,7 +98,7 @@
         '<time datetime="' + esc(n.date) + '">' + esc(fmtDate(n.date)) + (past ? ' · ' + t('past') : '') + '</time>' +
         '<h3>' + esc(pick(n, 'title')) + '</h3>' +
         '<p>' + esc(pick(n, 'body')) + '</p>' +
-        (n.source ? '<cite class="src">' + (lang() === 'hi' ? 'स्रोत: ' : 'Source: ') + (/^https?:\/\//.test(n.source) ? '<a href="' + esc(n.source) + '" rel="noopener">' + esc(n.source.replace(/^https?:\/\//, '').split('/')[0]) + '</a>' : esc(n.source)) + '</cite>' : '') +
+        (n.source ? '<cite class="src">' + (lang() === 'hi' ? 'स्रोत: ' : 'Source: ') + (/^https?:\/\//.test(n.source) ? '<a href="' + esc(n.source) + '" target="_blank" rel="noopener noreferrer">' + esc(n.source.replace(/^https?:\/\//, '').split('/')[0]) + '</a>' : esc(n.source)) + '</cite>' : '') +
         '</article>';
     }).join('');
   }
@@ -127,8 +127,8 @@
     var list = gallery.filter(function (g) { return g.src && g.license && g.permission === true; });
     if (!list.length) { box.innerHTML = '<div class="empty">' + t('noPhotos') + '</div>'; return; }
     box.innerHTML = list.map(function (g) {
-      var lic = g.licenseUrl ? '<a href="' + esc(g.licenseUrl) + '" rel="noopener">' + esc(g.license) + '</a>' : esc(g.license);
-      var by = g.sourceUrl ? '<a href="' + esc(g.sourceUrl) + '" rel="noopener">' + esc(g.credit || '') + '</a>' : esc(g.credit || '');
+      var lic = g.licenseUrl ? '<a href="' + esc(g.licenseUrl) + '" target="_blank" rel="noopener noreferrer">' + esc(g.license) + '</a>' : esc(g.license);
+      var by = g.sourceUrl ? '<a href="' + esc(g.sourceUrl) + '" target="_blank" rel="noopener noreferrer">' + esc(g.credit || '') + '</a>' : esc(g.credit || '');
       return '<figure><img src="' + esc(g.src) + '" alt="' + esc(pick(g, 'caption')) + '" loading="lazy" decoding="async">' +
         '<figcaption>' + esc(pick(g, 'caption')) + '<span class="credit">' + t('photo') + by + ' · ' + lic + '</span></figcaption></figure>';
     }).join('');

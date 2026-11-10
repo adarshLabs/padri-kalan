@@ -11,6 +11,9 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&display=swap">
 <link rel="stylesheet" href="css/style.css">
 <script>
   // Apply saved language/theme before paint
@@ -25,8 +28,8 @@
 
 <div class="ribbon" role="note">
   <div class="wrap">
-    <span lang="hi">⚠️ यह गाँव के लोगों द्वारा चलाई जाने वाली सामुदायिक वेबसाइट है। यह <strong>सरकारी वेबसाइट नहीं है</strong> और ग्राम पंचायत या किसी सरकारी विभाग से जुड़ी नहीं है। <a href="contribute.html#disclaimer">और पढ़ें</a></span>
-    <span lang="en">⚠️ This is a community-run website made by villagers and well-wishers. It is <strong>not a government website</strong> and is not run by the Gram Panchayat or any government department. <a href="contribute.html#disclaimer">Read more</a></span>
+    <span class="r-long"><span lang="hi">यह गाँव के लोगों द्वारा चलाई जाने वाली सामुदायिक वेबसाइट है, <strong>सरकारी वेबसाइट नहीं</strong>।</span><span lang="en">A community-run website by villagers, <strong>not a government website</strong>.</span></span>
+    <a href="contribute.html#disclaimer"><span lang="hi">और पढ़ें</span><span lang="en">Read more</span></a>
   </div>
 </div>
 
@@ -37,7 +40,7 @@
       <span><span lang="hi">पडरी कलाँ</span><span lang="en">Padri Kalan</span>
         <small><span lang="hi">बिछिया · उन्नाव · उत्तर प्रदेश</span><span lang="en">Bichhiya · Unnao · Uttar Pradesh</span></small></span>
     </a>
-    <button class="btn" id="menuBtn" aria-expanded="false" aria-controls="nav"><span lang="hi">मेनू</span><span lang="en">Menu</span></button>
+    
     <nav class="main" id="nav" aria-label="Main">
       <ul>
         <li><a href="index.html"><span lang="hi">मुख्य पेज</span><span lang="en">Home</span></a></li>
@@ -50,8 +53,9 @@
       </ul>
     </nav>
     <div class="tools">
-      <button class="btn" id="langBtn" title="Change language / भाषा बदलें"><span lang="hi">English</span><span lang="en">हिन्दी</span></button>
-      <button class="btn" id="themeBtn" aria-label="Toggle dark mode" title="Light / dark"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+      <button class="btn lang" id="langBtn" title="Change language / भाषा बदलें"><span lang="hi">English</span><span lang="en">हिन्दी</span></button>
+      <button class="iconbtn" id="themeBtn" aria-label="Toggle dark mode" title="Light / dark"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+      <button class="iconbtn" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </header>
@@ -73,53 +77,53 @@
       <div>
         <h3>🧾 <span lang="hi">ज़मीन और प्रमाण पत्र</span><span lang="en">Land and certificates</span></h3>
         <ul class="links">
-          <li><a href="https://upbhulekh.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">खतौनी / भूलेख</span><span lang="en">Land records (Khatauni)</span></span><span class="dom">upbhulekh.gov.in</span></a></li>
-          <li><a href="https://edistrict.up.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">आय, जाति, निवास प्रमाण पत्र</span><span lang="en">Income, caste, domicile certificates</span></span><span class="dom">edistrict.up.gov.in</span></a></li>
-          <li><a href="https://www.digilocker.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">डिजिलॉकर (डिजिटल दस्तावेज़)</span><span lang="en">DigiLocker (digital documents)</span></span><span class="dom">digilocker.gov.in</span></a></li>
-          <li><a href="https://uidai.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">आधार</span><span lang="en">Aadhaar</span></span><span class="dom">uidai.gov.in</span></a></li>
+          <li><a href="https://upbhulekh.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">खतौनी / भूलेख</span><span lang="en">Land records (Khatauni)</span></span><span class="dom">upbhulekh.gov.in</span></a></li>
+          <li><a href="https://edistrict.up.gov.in/edistrictup/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">आय, जाति, निवास प्रमाण पत्र</span><span lang="en">Income, caste, domicile certificates</span></span><span class="dom">edistrict.up.gov.in</span></a></li>
+          <li><a href="https://www.digilocker.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">डिजिलॉकर (डिजिटल दस्तावेज़)</span><span lang="en">DigiLocker (digital documents)</span></span><span class="dom">digilocker.gov.in</span></a></li>
+          <li><a href="https://uidai.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">आधार</span><span lang="en">Aadhaar</span></span><span class="dom">uidai.gov.in</span></a></li>
         </ul>
       </div>
       <div>
         <h3>🌾 <span lang="hi">किसान</span><span lang="en">Farmers</span></h3>
         <ul class="links">
-          <li><a href="https://pmkisan.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">पीएम-किसान</span><span lang="en">PM-KISAN</span></span><span class="dom">pmkisan.gov.in</span></a></li>
-          <li><a href="https://pmfby.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">फ़सल बीमा</span><span lang="en">Crop insurance (PMFBY)</span></span><span class="dom">pmfby.gov.in</span></a></li>
-          <li><a href="https://soilhealth.dac.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">मृदा स्वास्थ्य कार्ड</span><span lang="en">Soil Health Card</span></span><span class="dom">soilhealth.dac.gov.in</span></a></li>
-          <li><a href="https://mausam.imd.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">मौसम (IMD)</span><span lang="en">Weather (IMD)</span></span><span class="dom">mausam.imd.gov.in</span></a></li>
+          <li><a href="https://pmkisan.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">पीएम-किसान</span><span lang="en">PM-KISAN</span></span><span class="dom">pmkisan.gov.in</span></a></li>
+          <li><a href="https://pmfby.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">फ़सल बीमा</span><span lang="en">Crop insurance (PMFBY)</span></span><span class="dom">pmfby.gov.in</span></a></li>
+          <li><a href="https://soilhealth.dac.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">मृदा स्वास्थ्य कार्ड</span><span lang="en">Soil Health Card</span></span><span class="dom">soilhealth.dac.gov.in</span></a></li>
+          <li><a href="https://mausam.imd.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">मौसम (IMD)</span><span lang="en">Weather (IMD)</span></span><span class="dom">mausam.imd.gov.in</span></a></li>
         </ul>
       </div>
       <div>
         <h3>🏛️ <span lang="hi">पंचायत और शिकायत</span><span lang="en">Panchayat and grievances</span></h3>
         <ul class="links">
-          <li><a href="https://egramswaraj.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">ई-ग्राम स्वराज (पंचायत के काम और ख़र्च)</span><span lang="en">eGramSwaraj (panchayat works and spending)</span></span><span class="dom">egramswaraj.gov.in</span></a></li>
-          <li><a href="https://jansunwai.up.nic.in/" rel="noopener" target="_blank"><span><span lang="hi">जनसुनवाई (शिकायत दर्ज करें)</span><span lang="en">Jansunwai (file a grievance)</span></span><span class="dom">jansunwai.up.nic.in</span></a></li>
-          <li><a href="https://unnao.nic.in/" rel="noopener" target="_blank"><span><span lang="hi">ज़िला उन्नाव की वेबसाइट</span><span lang="en">Unnao district website</span></span><span class="dom">unnao.nic.in</span></a></li>
-          <li><a href="https://voters.eci.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">मतदाता सूची / वोटर कार्ड</span><span lang="en">Voter list / voter card</span></span><span class="dom">voters.eci.gov.in</span></a></li>
+          <li><a href="https://egramswaraj.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">ई-ग्राम स्वराज (पंचायत के काम और ख़र्च)</span><span lang="en">eGramSwaraj (panchayat works and spending)</span></span><span class="dom">egramswaraj.gov.in</span></a></li>
+          <li><a href="https://jansunwai.up.nic.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">जनसुनवाई (शिकायत दर्ज करें)</span><span lang="en">Jansunwai (file a grievance)</span></span><span class="dom">jansunwai.up.nic.in</span></a></li>
+          <li><a href="https://unnao.nic.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">ज़िला उन्नाव की वेबसाइट</span><span lang="en">Unnao district website</span></span><span class="dom">unnao.nic.in</span></a></li>
+          <li><a href="https://voters.eci.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">मतदाता सूची / वोटर कार्ड</span><span lang="en">Voter list / voter card</span></span><span class="dom">voters.eci.gov.in</span></a></li>
         </ul>
       </div>
       <div>
         <h3>🍚 <span lang="hi">राशन, स्वास्थ्य, पेंशन</span><span lang="en">Ration, health, pension</span></h3>
         <ul class="links">
-          <li><a href="https://fcs.up.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">राशन कार्ड</span><span lang="en">Ration card</span></span><span class="dom">fcs.up.gov.in</span></a></li>
-          <li><a href="https://beneficiary.nha.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">आयुष्मान कार्ड</span><span lang="en">Ayushman card</span></span><span class="dom">beneficiary.nha.gov.in</span></a></li>
-          <li><a href="https://sspy-up.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">वृद्धावस्था / विधवा / दिव्यांग पेंशन</span><span lang="en">Old-age / widow / disability pension</span></span><span class="dom">sspy-up.gov.in</span></a></li>
+          <li><a href="https://fcs.up.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">राशन कार्ड</span><span lang="en">Ration card</span></span><span class="dom">fcs.up.gov.in</span></a></li>
+          <li><a href="https://nha.gov.in/Ayushman-Card" target="_blank" rel="noopener noreferrer"><span><span lang="hi">आयुष्मान कार्ड</span><span lang="en">Ayushman card</span></span><span class="dom">nha.gov.in</span></a></li>
+          <li><a href="https://sspy-up.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">वृद्धावस्था / विधवा / दिव्यांग पेंशन</span><span lang="en">Old-age / widow / disability pension</span></span><span class="dom">sspy-up.gov.in</span></a></li>
         </ul>
       </div>
       <div>
         <h3>🎓 <span lang="hi">पढ़ाई और नौकरी</span><span lang="en">Study and jobs</span></h3>
         <ul class="links">
-          <li><a href="https://scholarship.up.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">यूपी छात्रवृत्ति</span><span lang="en">UP scholarships</span></span><span class="dom">scholarship.up.gov.in</span></a></li>
-          <li><a href="https://scholarships.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">राष्ट्रीय छात्रवृत्ति पोर्टल</span><span lang="en">National Scholarship Portal</span></span><span class="dom">scholarships.gov.in</span></a></li>
-          <li><a href="https://www.ncs.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">नेशनल करियर सर्विस (नौकरियाँ)</span><span lang="en">National Career Service (jobs)</span></span><span class="dom">ncs.gov.in</span></a></li>
-          <li><a href="https://www.skillindiadigital.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">स्किल इंडिया (मुफ़्त कोर्स)</span><span lang="en">Skill India (free courses)</span></span><span class="dom">skillindiadigital.gov.in</span></a></li>
+          <li><a href="https://scholarship.up.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">यूपी छात्रवृत्ति</span><span lang="en">UP scholarships</span></span><span class="dom">scholarship.up.gov.in</span></a></li>
+          <li><a href="https://scholarships.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">राष्ट्रीय छात्रवृत्ति पोर्टल</span><span lang="en">National Scholarship Portal</span></span><span class="dom">scholarships.gov.in</span></a></li>
+          <li><a href="https://www.ncs.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">नेशनल करियर सर्विस (नौकरियाँ)</span><span lang="en">National Career Service (jobs)</span></span><span class="dom">ncs.gov.in</span></a></li>
+          <li><a href="https://www.skillindiadigital.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">स्किल इंडिया (मुफ़्त कोर्स)</span><span lang="en">Skill India (free courses)</span></span><span class="dom">skillindiadigital.gov.in</span></a></li>
         </ul>
       </div>
       <div>
         <h3>🔌 <span lang="hi">बिजली और साइबर सुरक्षा</span><span lang="en">Electricity and cyber safety</span></h3>
         <ul class="links">
-          <li><a href="https://www.uppcl.org/" rel="noopener" target="_blank"><span><span lang="hi">बिजली बिल / शिकायत</span><span lang="en">Electricity bill / complaint</span></span><span class="dom">uppcl.org</span></a></li>
-          <li><a href="https://cybercrime.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">ऑनलाइन धोखाधड़ी की रिपोर्ट</span><span lang="en">Report online fraud</span></span><span class="dom">cybercrime.gov.in</span></a></li>
-          <li><a href="https://www.mgmd.gov.in/" rel="noopener" target="_blank"><span><span lang="hi">मेरा गाँव मेरी धरोहर (संस्कृति मंत्रालय)</span><span lang="en">Mera Gaon Meri Dharohar (Ministry of Culture)</span></span><span class="dom">mgmd.gov.in</span></a></li>
+          <li><a href="https://www.uppcl.org/uppcl/en" target="_blank" rel="noopener noreferrer"><span><span lang="hi">बिजली बिल / शिकायत</span><span lang="en">Electricity bill / complaint</span></span><span class="dom">uppcl.org</span></a></li>
+          <li><a href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">ऑनलाइन धोखाधड़ी की रिपोर्ट</span><span lang="en">Report online fraud</span></span><span class="dom">cybercrime.gov.in</span></a></li>
+          <li><a href="https://mgmd.gov.in/" target="_blank" rel="noopener noreferrer"><span><span lang="hi">मेरा गाँव मेरी धरोहर (संस्कृति मंत्रालय)</span><span lang="en">Mera Gaon Meri Dharohar (Ministry of Culture)</span></span><span class="dom">mgmd.gov.in</span></a></li>
         </ul>
       </div>
     </div>
@@ -171,6 +175,13 @@
   </div>
 </footer>
 
+<nav class="tabbar" aria-label="Quick">
+  <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span lang="hi">मुख्य</span><span lang="en">Home</span></a>
+  <a href="about.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span lang="hi">परिचय</span><span lang="en">About</span></a>
+  <a href="temple.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v3M8 9l4-4 4 4M6 21V11h12v10M3 21h18M10 21v-5h4v5"/></svg><span lang="hi">मंदिर</span><span lang="en">Temple</span></a>
+  <a href="services.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M4 10h16M12 3l9 5H3zM6 10v8M10 10v8M14 10v8M18 10v8"/></svg><span lang="hi">सेवाएँ</span><span lang="en">Services</span></a>
+  <a href="notices.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10zM17 9a4 4 0 0 1 0 6"/></svg><span lang="hi">सूचनाएँ</span><span lang="en">Notices</span></a>
+</nav>
 <a class="btn" id="toTop" href="#top" aria-label="Back to top">↑</a>
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>

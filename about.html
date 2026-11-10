@@ -11,6 +11,9 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&display=swap">
 <link rel="stylesheet" href="css/style.css">
 <script>
   // Apply saved language/theme before paint
@@ -25,8 +28,8 @@
 
 <div class="ribbon" role="note">
   <div class="wrap">
-    <span lang="hi">⚠️ यह गाँव के लोगों द्वारा चलाई जाने वाली सामुदायिक वेबसाइट है। यह <strong>सरकारी वेबसाइट नहीं है</strong> और ग्राम पंचायत या किसी सरकारी विभाग से जुड़ी नहीं है। <a href="contribute.html#disclaimer">और पढ़ें</a></span>
-    <span lang="en">⚠️ This is a community-run website made by villagers and well-wishers. It is <strong>not a government website</strong> and is not run by the Gram Panchayat or any government department. <a href="contribute.html#disclaimer">Read more</a></span>
+    <span class="r-long"><span lang="hi">यह गाँव के लोगों द्वारा चलाई जाने वाली सामुदायिक वेबसाइट है, <strong>सरकारी वेबसाइट नहीं</strong>।</span><span lang="en">A community-run website by villagers, <strong>not a government website</strong>.</span></span>
+    <a href="contribute.html#disclaimer"><span lang="hi">और पढ़ें</span><span lang="en">Read more</span></a>
   </div>
 </div>
 
@@ -37,7 +40,7 @@
       <span><span lang="hi">पडरी कलाँ</span><span lang="en">Padri Kalan</span>
         <small><span lang="hi">बिछिया · उन्नाव · उत्तर प्रदेश</span><span lang="en">Bichhiya · Unnao · Uttar Pradesh</span></small></span>
     </a>
-    <button class="btn" id="menuBtn" aria-expanded="false" aria-controls="nav"><span lang="hi">मेनू</span><span lang="en">Menu</span></button>
+    
     <nav class="main" id="nav" aria-label="Main">
       <ul>
         <li><a href="index.html"><span lang="hi">मुख्य पेज</span><span lang="en">Home</span></a></li>
@@ -50,8 +53,9 @@
       </ul>
     </nav>
     <div class="tools">
-      <button class="btn" id="langBtn" title="Change language / भाषा बदलें"><span lang="hi">English</span><span lang="en">हिन्दी</span></button>
-      <button class="btn" id="themeBtn" aria-label="Toggle dark mode" title="Light / dark"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+      <button class="btn lang" id="langBtn" title="Change language / भाषा बदलें"><span lang="hi">English</span><span lang="en">हिन्दी</span></button>
+      <button class="iconbtn" id="themeBtn" aria-label="Toggle dark mode" title="Light / dark"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+      <button class="iconbtn" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </header>
@@ -97,10 +101,10 @@
         </table></div>
         <cite class="src">
           <span lang="hi">स्रोत:</span><span lang="en">Sources:</span>
-          <a href="https://census2011.co.in/data/village/142242-padri-kalan-uttar-pradesh.html" rel="noopener">census2011.co.in</a>,
-          <a href="https://villageinfo.in/uttar-pradesh/unnao/unnao/padri-kalan.html" rel="noopener">villageinfo.in</a>,
-          <a href="http://www.onefivenine.com/india/villages/Unnao/Bichhiya/Padri-Kalan" rel="noopener">onefivenine.com</a>,
-          <a href="https://en.wikipedia.org/wiki/Bichhiya,_Unnao" rel="noopener">Wikipedia</a>
+          <a href="https://census2011.co.in/data/village/142242-padri-kalan-uttar-pradesh.html" target="_blank" rel="noopener noreferrer">census2011.co.in</a>,
+          <a href="https://villageinfo.in/uttar-pradesh/unnao/unnao/padri-kalan.html" target="_blank" rel="noopener noreferrer">villageinfo.in</a>,
+          <a href="http://www.onefivenine.com/india/villages/Unnao/Bichhiya/Padri-Kalan" target="_blank" rel="noopener noreferrer">onefivenine.com</a>,
+          <a href="https://en.wikipedia.org/wiki/Bichhiya,_Unnao" target="_blank" rel="noopener noreferrer">Wikipedia</a>
         </cite>
       </div>
     </div>
@@ -167,7 +171,7 @@
         <p class="small muted" lang="en">Details specific to Padri Kalan (crops, mandi, irrigation) are still to be collected. <a href="contribute.html#contribute">Help add them</a>.</p>
       </div>
     </div>
-    <p style="margin-top:14px"><cite class="src"><span lang="hi">स्रोत:</span><span lang="en">Sources:</span> <a href="https://census2011.co.in/data/village/142242-padri-kalan-uttar-pradesh.html" rel="noopener">Census 2011 via census2011.co.in</a> · <a href="https://villageinfo.in/uttar-pradesh/unnao/unnao/padri-kalan.html" rel="noopener">villageinfo.in</a> · <a href="https://en.wikipedia.org/wiki/Bichhiya,_Unnao" rel="noopener">Wikipedia: Bichhiya, Unnao</a> · <a href="https://en.wikipedia.org/wiki/Unnao_district" rel="noopener">Wikipedia: Unnao district</a></cite></p>
+    <p style="margin-top:14px"><cite class="src"><span lang="hi">स्रोत:</span><span lang="en">Sources:</span> <a href="https://census2011.co.in/data/village/142242-padri-kalan-uttar-pradesh.html" target="_blank" rel="noopener noreferrer">Census 2011 via census2011.co.in</a> · <a href="https://villageinfo.in/uttar-pradesh/unnao/unnao/padri-kalan.html" target="_blank" rel="noopener noreferrer">villageinfo.in</a> · <a href="https://en.wikipedia.org/wiki/Bichhiya,_Unnao" target="_blank" rel="noopener noreferrer">Wikipedia: Bichhiya, Unnao</a> · <a href="https://en.wikipedia.org/wiki/Unnao_district" target="_blank" rel="noopener noreferrer">Wikipedia: Unnao district</a></cite></p>
   </div>
 </section>
 <section class="block" id="history">
@@ -213,7 +217,7 @@
         <a class="btn" href="contribute.html#contribute"><span lang="hi">कहानी भेजें</span><span lang="en">Share a story</span></a>
       </div>
     </div>
-    <p style="margin-top:14px"><cite class="src"><span lang="hi">स्रोत:</span><span lang="en">Sources:</span> <a href="https://en.wikipedia.org/wiki/Unnao_district" rel="noopener">Wikipedia: Unnao district</a> · <a href="https://en.wikipedia.org/wiki/Bichhiya,_Unnao" rel="noopener">Wikipedia: Bichhiya, Unnao</a> · <a href="https://unnao.nic.in/history/" rel="noopener">unnao.nic.in (history)</a></cite></p>
+    <p style="margin-top:14px"><cite class="src"><span lang="hi">स्रोत:</span><span lang="en">Sources:</span> <a href="https://en.wikipedia.org/wiki/Unnao_district" target="_blank" rel="noopener noreferrer">Wikipedia: Unnao district</a> · <a href="https://en.wikipedia.org/wiki/Bichhiya,_Unnao" target="_blank" rel="noopener noreferrer">Wikipedia: Bichhiya, Unnao</a> · <a href="https://unnao.nic.in/history/" target="_blank" rel="noopener noreferrer">unnao.nic.in (history)</a></cite></p>
   </div>
 </section>
 <section class="block" id="reach">
@@ -238,7 +242,7 @@
           <li><span lang="hi">उन्नाव जंक्शन: ~18 किमी</span><span lang="en">Unnao Junction: ~18 km</span></li>
           <li><span lang="hi">कानपुर सेंट्रल: ~31 किमी</span><span lang="en">Kanpur Central: ~31 km</span></li>
         </ul>
-        <p class="small muted"><span lang="hi">ट्रेन समय के लिए केवल आधिकारिक <a href="https://enquiry.indianrail.gov.in/" rel="noopener">NTES</a> देखें।</span><span lang="en">For train times use the official <a href="https://enquiry.indianrail.gov.in/" rel="noopener">NTES</a> site.</span></p>
+        <p class="small muted"><span lang="hi">ट्रेन समय के लिए केवल आधिकारिक <a href="https://enquiry.indianrail.gov.in/mntes/" target="_blank" rel="noopener noreferrer">NTES</a> देखें।</span><span lang="en">For train times use the official <a href="https://enquiry.indianrail.gov.in/mntes/" target="_blank" rel="noopener noreferrer">NTES</a> site.</span></p>
       </div>
       <div class="card">
         <h3>✈️ <span lang="hi">हवाई अड्डा</span><span lang="en">Airports</span></h3>
@@ -265,7 +269,7 @@
           <li><span lang="hi">प्राथमिक / उच्च प्राथमिक विद्यालय, पडरी कलाँ</span><span lang="en">Primary / upper primary school, Padri Kalan</span></li>
           <li><span lang="hi">शिवप्रसाद पाण्डेय इंटर कॉलेज</span><span lang="en">Shivprasad Pandey Inter College</span></li>
         </ul>
-        <p class="small"><span lang="hi">किसी भी स्कूल की आधिकारिक जानकारी <a href="https://udiseplus.gov.in/" rel="noopener">UDISE+</a> पर देखें।</span><span lang="en">Check any school's official record on <a href="https://udiseplus.gov.in/" rel="noopener">UDISE+</a>.</span></p>
+        <p class="small"><span lang="hi">किसी भी स्कूल की आधिकारिक जानकारी <a href="https://udiseplus.gov.in/" target="_blank" rel="noopener noreferrer">UDISE+</a> पर देखें।</span><span lang="en">Check any school's official record on <a href="https://udiseplus.gov.in/" target="_blank" rel="noopener noreferrer">UDISE+</a>.</span></p>
       </div>
       <div class="card">
         <h3>🏥 <span lang="hi">स्वास्थ्य</span><span lang="en">Health</span></h3>
@@ -277,10 +281,10 @@
       </div>
     </div>
     <div class="cta" style="margin-top:18px">
-      <a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Padri+Kalan+Bichhiya+Unnao+Uttar+Pradesh" rel="noopener" target="_blank"><span lang="hi">Google Maps पर देखें</span><span lang="en">Open in Google Maps</span></a>
-      <a class="btn" href="https://www.openstreetmap.org/search?query=Padri%20Kalan%2C%20Unnao" rel="noopener" target="_blank"><span lang="hi">OpenStreetMap पर देखें</span><span lang="en">Open in OpenStreetMap</span></a>
+      <a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Padri+Kalan+Bichhiya+Unnao+Uttar+Pradesh" target="_blank" rel="noopener noreferrer"><span lang="hi">Google Maps पर देखें</span><span lang="en">Open in Google Maps</span></a>
+      <a class="btn" href="https://www.openstreetmap.org/search?query=Padri%20Kalan%2C%20Unnao" target="_blank" rel="noopener noreferrer"><span lang="hi">OpenStreetMap पर देखें</span><span lang="en">Open in OpenStreetMap</span></a>
     </div>
-    <p style="margin-top:14px"><cite class="src"><span lang="hi">स्रोत:</span><span lang="en">Sources:</span> <a href="http://www.onefivenine.com/india/villages/Unnao/Bichhiya/Padri-Kalan" rel="noopener">onefivenine.com</a> · <a href="https://geoiq.io/places/Padri-Kalan/hEMoC5Bei4" rel="noopener">geoiq.io</a> · <a href="https://villageinfo.in/uttar-pradesh/unnao/unnao/padri-kalan.html" rel="noopener">villageinfo.in</a></cite></p>
+    <p style="margin-top:14px"><cite class="src"><span lang="hi">स्रोत:</span><span lang="en">Sources:</span> <a href="http://www.onefivenine.com/india/villages/Unnao/Bichhiya/Padri-Kalan" target="_blank" rel="noopener noreferrer">onefivenine.com</a> · <a href="https://geoiq.io/places/Padri-Kalan/hEMoC5Bei4" target="_blank" rel="noopener noreferrer">geoiq.io</a> · <a href="https://villageinfo.in/uttar-pradesh/unnao/unnao/padri-kalan.html" target="_blank" rel="noopener noreferrer">villageinfo.in</a></cite></p>
   </div>
 </section>
 </main>
@@ -312,6 +316,13 @@
   </div>
 </footer>
 
+<nav class="tabbar" aria-label="Quick">
+  <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span lang="hi">मुख्य</span><span lang="en">Home</span></a>
+  <a href="about.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span lang="hi">परिचय</span><span lang="en">About</span></a>
+  <a href="temple.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v3M8 9l4-4 4 4M6 21V11h12v10M3 21h18M10 21v-5h4v5"/></svg><span lang="hi">मंदिर</span><span lang="en">Temple</span></a>
+  <a href="services.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M4 10h16M12 3l9 5H3zM6 10v8M10 10v8M14 10v8M18 10v8"/></svg><span lang="hi">सेवाएँ</span><span lang="en">Services</span></a>
+  <a href="notices.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10zM17 9a4 4 0 0 1 0 6"/></svg><span lang="hi">सूचनाएँ</span><span lang="en">Notices</span></a>
+</nav>
 <a class="btn" id="toTop" href="#top" aria-label="Back to top">↑</a>
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>

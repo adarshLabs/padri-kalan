@@ -11,6 +11,9 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&display=swap">
 <link rel="stylesheet" href="css/style.css">
 <script>
   // Apply saved language/theme before paint
@@ -25,8 +28,8 @@
 
 <div class="ribbon" role="note">
   <div class="wrap">
-    <span lang="hi">⚠️ यह गाँव के लोगों द्वारा चलाई जाने वाली सामुदायिक वेबसाइट है। यह <strong>सरकारी वेबसाइट नहीं है</strong> और ग्राम पंचायत या किसी सरकारी विभाग से जुड़ी नहीं है। <a href="contribute.html#disclaimer">और पढ़ें</a></span>
-    <span lang="en">⚠️ This is a community-run website made by villagers and well-wishers. It is <strong>not a government website</strong> and is not run by the Gram Panchayat or any government department. <a href="contribute.html#disclaimer">Read more</a></span>
+    <span class="r-long"><span lang="hi">यह गाँव के लोगों द्वारा चलाई जाने वाली सामुदायिक वेबसाइट है, <strong>सरकारी वेबसाइट नहीं</strong>।</span><span lang="en">A community-run website by villagers, <strong>not a government website</strong>.</span></span>
+    <a href="contribute.html#disclaimer"><span lang="hi">और पढ़ें</span><span lang="en">Read more</span></a>
   </div>
 </div>
 
@@ -37,7 +40,7 @@
       <span><span lang="hi">पडरी कलाँ</span><span lang="en">Padri Kalan</span>
         <small><span lang="hi">बिछिया · उन्नाव · उत्तर प्रदेश</span><span lang="en">Bichhiya · Unnao · Uttar Pradesh</span></small></span>
     </a>
-    <button class="btn" id="menuBtn" aria-expanded="false" aria-controls="nav"><span lang="hi">मेनू</span><span lang="en">Menu</span></button>
+    
     <nav class="main" id="nav" aria-label="Main">
       <ul>
         <li><a href="index.html" aria-current="page"><span lang="hi">मुख्य पेज</span><span lang="en">Home</span></a></li>
@@ -50,8 +53,9 @@
       </ul>
     </nav>
     <div class="tools">
-      <button class="btn" id="langBtn" title="Change language / भाषा बदलें"><span lang="hi">English</span><span lang="en">हिन्दी</span></button>
-      <button class="btn" id="themeBtn" aria-label="Toggle dark mode" title="Light / dark"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+      <button class="btn lang" id="langBtn" title="Change language / भाषा बदलें"><span lang="hi">English</span><span lang="en">हिन्दी</span></button>
+      <button class="iconbtn" id="themeBtn" aria-label="Toggle dark mode" title="Light / dark"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+      <button class="iconbtn" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </header>
@@ -59,47 +63,45 @@
 <main id="main">
 <div id="top"></div>
 <section class="hero">
-  <div class="wrap">
-    <span class="tag"><span lang="hi">ग्राम पंचायत पडरी कलाँ · विकास खंड बिछिया</span><span lang="en">Padri Kalan Gram Panchayat · Bichhiya block</span></span>
-    <h1><span lang="hi">पडरी कलाँ में आपका स्वागत है</span><span lang="en">Welcome to Padri Kalan</span></h1>
+  <div class="hero-sky" aria-hidden="true"><span class="sun"></span></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow"><span lang="hi">ग्राम पंचायत · विकास खंड बिछिया · उन्नाव</span><span lang="en">Gram Panchayat · Bichhiya block · Unnao</span></span>
+    <h1><span lang="hi">पडरी कलाँ में<br>आपका स्वागत है</span><span lang="en">Welcome to<br>Padri Kalan</span></h1>
     <p class="lead">
-      <span lang="hi">उन्नाव ज़िले का एक खेती-प्रधान गाँव, जहाँ 2011 की जनगणना में 6,216 लोग और 1,232 परिवार थे। यह वेबसाइट गाँव के बारे में सार्वजनिक, स्रोत-सहित जानकारी एक जगह लाती है, ताकि गाँव के लोग, बाहर रहने वाले परिवार और आने वाले मेहमान सब इसका उपयोग कर सकें।</span>
-      <span lang="en">A farming village in Unnao district, home to 6,216 people in 1,232 households at the 2011 Census. This site brings together public, sourced information about the village in one place, for people who live here, families who moved away, and visitors.</span>
+      <span lang="hi">उन्नाव ज़िले का खेती-प्रधान गाँव, माँ बालेश्वरी की धरती। गाँव की हर ज़रूरी जानकारी, एक जगह।</span>
+      <span lang="en">A farming village in Unnao district, home of Maa Baleshwari. Everything about the village, in one place.</span>
     </p>
-    <div class="cta">
-      <a class="btn primary" href="about.html#facts"><span lang="hi">गाँव के आँकड़े देखें</span><span lang="en">See village facts</span></a>
-      <a class="btn" href="temple.html#temple"><span lang="hi">बालेश्वरी मंदिर</span><span lang="en">Baleshwari Mandir</span></a>
-      <a class="btn" href="services.html#services"><span lang="hi">सरकारी सेवाओं के लिंक</span><span lang="en">Government service links</span></a>
-      <button class="btn" id="shareBtn"><span lang="hi">WhatsApp पर साझा करें</span><span lang="en">Share on WhatsApp</span></button>
+    <div class="chips">
+      <span class="chip"><b>6,216</b><span lang="hi">लोग</span><span lang="en">people</span></span>
+      <span class="chip"><b>1,232</b><span lang="hi">परिवार</span><span lang="en">households</span></span>
+      <span class="chip"><b>14</b><span lang="hi">वर्ग किमी</span><span lang="en">sq km</span></span>
+      <span class="chip"><b>69.9%</b><span lang="hi">साक्षरता</span><span lang="en">literacy</span></span>
     </div>
-    <div class="fields" aria-hidden="true">
-      <!-- Original illustration (no copyrighted photo): fields, mustard, trees -->
-      <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMid slice">
-        <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe8f3"/><stop offset="1" stop-color="#fdf3dc"/></linearGradient></defs>
-        <rect width="1200" height="260" fill="url(#sky)"/>
-        <circle cx="980" cy="70" r="38" fill="#f6c25b"/>
-        <path d="M0 150 C200 120 380 130 600 150 S1000 170 1200 140 V260 H0Z" fill="#9cc56b"/>
-        <path d="M0 180 C250 160 500 170 700 190 S1050 200 1200 180 V260 H0Z" fill="#e8c547"/>
-        <path d="M0 215 C300 200 600 205 900 222 S1150 228 1200 220 V260 H0Z" fill="#5e9a43"/>
-        <g fill="#3f7a35"><circle cx="140" cy="128" r="26"/><circle cx="170" cy="120" r="22"/><rect x="150" y="135" width="8" height="28" fill="#6b4b2a"/>
-          <circle cx="820" cy="134" r="30"/><circle cx="852" cy="126" r="22"/><rect x="830" y="145" width="8" height="26" fill="#6b4b2a"/>
-          <circle cx="430" cy="138" r="18"/><rect x="427" y="148" width="6" height="18" fill="#6b4b2a"/></g>
-        <g fill="#c98a3c"><rect x="560" y="128" width="54" height="30"/><path d="M552 130 L587 108 L622 130Z" fill="#a0522d"/><rect x="580" y="140" width="12" height="18" fill="#6b4b2a"/></g>
-        <path d="M0 238 C150 230 260 246 420 240 S700 232 900 242 1100 250 1200 244" stroke="#c9b48a" stroke-width="6" fill="none"/>
-      </svg>
+    <div class="cta">
+      <a class="btn sun-btn" href="temple.html"><span lang="hi">🛕 बालेश्वरी मंदिर</span><span lang="en">🛕 Baleshwari Mandir</span></a>
+      <button class="btn ghost" id="shareBtn"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.1.1.6-.1 1.2z"/></svg><span lang="hi">WhatsApp पर भेजें</span><span lang="en">Share on WhatsApp</span></button>
     </div>
   </div>
+  <svg class="hero-land" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 90 C200 55 380 70 600 92 S1000 110 1200 75 V200 H0Z" fill="#7fb35a"/>
+    <path d="M0 125 C250 100 500 112 700 132 S1050 142 1200 120 V200 H0Z" fill="#e3bf3f"/>
+    <path d="M0 160 C300 142 600 150 900 166 S1150 172 1200 164 V200 H0Z" fill="var(--bg)"/>
+    <g fill="#2f6b3a"><circle cx="140" cy="70" r="24"/><circle cx="168" cy="62" r="20"/><rect x="150" y="76" width="7" height="26" fill="#5b3f22"/>
+    <circle cx="880" cy="84" r="26"/><circle cx="910" cy="76" r="19"/><rect x="890" y="94" width="7" height="22" fill="#5b3f22"/></g>
+    <g><rect x="560" y="72" width="50" height="28" fill="#c98a3c"/><path d="M552 74 L585 52 L618 74Z" fill="#a0522d"/><rect x="579" y="84" width="11" height="16" fill="#5b3f22"/></g>
+    <g transform="translate(1040 40)"><rect x="-14" y="30" width="28" height="34" fill="#f2e6cf"/><path d="M-18 30 L0 0 L18 30Z" fill="#e0712c"/><rect x="-1" y="-14" width="2" height="16" fill="#5b3f22"/><path d="M1 -14 L12 -10 L1 -6Z" fill="#e0712c"/><rect x="-5" y="46" width="10" height="18" fill="#a0522d"/></g>
+  </svg>
 </section>
 <section class="block" id="explore">
   <div class="wrap">
     <h2><span lang="hi">वेबसाइट में क्या है</span><span lang="en">Explore the site</span></h2>
-    <div class="grid g3 explore">
-      <a class="card" href="about.html"><span class="ico">📜</span><h3><span lang="hi">परिचय व इतिहास</span><span lang="en">About &amp; history</span></h3><p class="muted"><span lang="hi">जनगणना के आँकड़े, अवध का इतिहास, कैसे पहुँचें</span><span lang="en">Census figures, Awadh history, how to get here</span></p></a>
-      <a class="card" href="temple.html"><span class="ico">🛕</span><h3><span lang="hi">बालेश्वरी मंदिर</span><span lang="en">Baleshwari Mandir</span></h3><p class="muted"><span lang="hi">माँ बालेश्वरी देवी का मंदिर, गाँव की आस्था का केंद्र</span><span lang="en">The temple of Maa Baleshwari Devi, the heart of village faith</span></p></a>
-      <a class="card" href="gallery.html"><span class="ico">📷</span><h3><span lang="hi">फ़ोटो व कहानियाँ</span><span lang="en">Photos &amp; stories</span></h3><p class="muted"><span lang="hi">गाँव की फ़ोटो और बुज़ुर्गों की कहानियाँ</span><span lang="en">Village photos and elders' stories</span></p></a>
-      <a class="card" href="services.html"><span class="ico">🏛️</span><h3><span lang="hi">सरकारी सेवाएँ</span><span lang="en">Government services</span></h3><p class="muted"><span lang="hi">खतौनी, प्रमाण पत्र, किसान, पेंशन और हेल्पलाइन नंबर</span><span lang="en">Land records, certificates, farmers, pensions and helplines</span></p></a>
-      <a class="card" href="notices.html"><span class="ico">📢</span><h3><span lang="hi">सूचनाएँ व गाँव का गौरव</span><span lang="en">Notices &amp; village pride</span></h3><p class="muted"><span lang="hi">ग्राम सभा, शिविर, मेले और गाँव के होनहार</span><span lang="en">Gram Sabha, camps, fairs and people who made us proud</span></p></a>
-      <a class="card" href="contribute.html"><span class="ico">🤝</span><h3><span lang="hi">योगदान दें</span><span lang="en">Contribute</span></h3><p class="muted"><span lang="hi">जानकारी, फ़ोटो या सुधार भेजें</span><span lang="en">Send information, photos or corrections</span></p></a>
+    <div class="explore">
+      <a class="tile t1" href="about.html"><span class="ico">📜</span><h3><span lang="hi">परिचय व इतिहास</span><span lang="en">About &amp; history</span></h3><p class="muted"><span lang="hi">जनगणना के आँकड़े, अवध का इतिहास, कैसे पहुँचें</span><span lang="en">Census figures, Awadh history, how to get here</span></p></a>
+      <a class="tile t2" href="temple.html"><span class="ico">🛕</span><h3><span lang="hi">बालेश्वरी मंदिर</span><span lang="en">Baleshwari Mandir</span></h3><p class="muted"><span lang="hi">माँ बालेश्वरी देवी का मंदिर, गाँव की आस्था का केंद्र</span><span lang="en">The temple of Maa Baleshwari Devi, the heart of village faith</span></p></a>
+      <a class="tile t3" href="gallery.html"><span class="ico">📷</span><h3><span lang="hi">फ़ोटो व कहानियाँ</span><span lang="en">Photos &amp; stories</span></h3><p class="muted"><span lang="hi">गाँव की फ़ोटो और बुज़ुर्गों की कहानियाँ</span><span lang="en">Village photos and elders' stories</span></p></a>
+      <a class="tile t4" href="services.html"><span class="ico">🏛️</span><h3><span lang="hi">सरकारी सेवाएँ</span><span lang="en">Government services</span></h3><p class="muted"><span lang="hi">खतौनी, प्रमाण पत्र, किसान, पेंशन और हेल्पलाइन नंबर</span><span lang="en">Land records, certificates, farmers, pensions and helplines</span></p></a>
+      <a class="tile t5" href="notices.html"><span class="ico">📢</span><h3><span lang="hi">सूचनाएँ व गाँव का गौरव</span><span lang="en">Notices &amp; village pride</span></h3><p class="muted"><span lang="hi">ग्राम सभा, शिविर, मेले और गाँव के होनहार</span><span lang="en">Gram Sabha, camps, fairs and people who made us proud</span></p></a>
+      <a class="tile t6" href="contribute.html"><span class="ico">🤝</span><h3><span lang="hi">योगदान दें</span><span lang="en">Contribute</span></h3><p class="muted"><span lang="hi">जानकारी, फ़ोटो या सुधार भेजें</span><span lang="en">Send information, photos or corrections</span></p></a>
     </div>
   </div>
 </section>
@@ -141,6 +143,13 @@
   </div>
 </footer>
 
+<nav class="tabbar" aria-label="Quick">
+  <a href="index.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span lang="hi">मुख्य</span><span lang="en">Home</span></a>
+  <a href="about.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span lang="hi">परिचय</span><span lang="en">About</span></a>
+  <a href="temple.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v3M8 9l4-4 4 4M6 21V11h12v10M3 21h18M10 21v-5h4v5"/></svg><span lang="hi">मंदिर</span><span lang="en">Temple</span></a>
+  <a href="services.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M4 10h16M12 3l9 5H3zM6 10v8M10 10v8M14 10v8M18 10v8"/></svg><span lang="hi">सेवाएँ</span><span lang="en">Services</span></a>
+  <a href="notices.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10zM17 9a4 4 0 0 1 0 6"/></svg><span lang="hi">सूचनाएँ</span><span lang="en">Notices</span></a>
+</nav>
 <a class="btn" id="toTop" href="#top" aria-label="Back to top">↑</a>
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>

@@ -33,7 +33,7 @@ Other features: a Hindi/English toggle (remembered per phone), dark mode, a What
 
 - **UK parish and village websites** (for example [Pillerton Hersey](https://pillertonherseypc.org.uk/), [Shabbington](https://shabbington-pc.gov.uk) and the feature list at [parishcouncil.net](https://www.parishcouncil.net/features.html)): a notices board, events calendar, local directory, maps, a links page to higher councils, an FAQ and a clear "who runs this" note.
 - **Indian model villages** such as [Punsari, Gujarat](https://thebetterindia.com/112312/punsari-best-village-sarpanch-himanshu-patel): pride in the village's progress and keeping people informed.
-- **[Mera Gaon Meri Dharohar](https://www.mgmd.gov.in/)** (Ministry of Culture): recording a village's heritage, stories and traditions.
+- **[Mera Gaon Meri Dharohar](https://mgmd.gov.in/)** (Ministry of Culture): recording a village's heritage, stories and traditions.
 
 ---
 
