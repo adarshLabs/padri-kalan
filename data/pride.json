@@ -1,0 +1,12 @@
+{
+  "_help": "Village pride wall. Add a person ONLY after they (or a parent, for under-18s) give written consent, then set consent to true. Entries with consent other than true are never shown. Never add phone numbers, addresses, caste, Aadhaar or photos without consent. Example item (not shown because consent is false):",
+  "items": [
+    {
+      "consent": false,
+      "name": { "hi": "उदाहरण नाम", "en": "Example Name" },
+      "field": { "hi": "शिक्षा", "en": "Education" },
+      "achievement": { "hi": "उपलब्धि का एक-दो पंक्ति में विवरण।", "en": "One or two lines about the achievement." },
+      "year": "2026"
+    }
+  ]
+}

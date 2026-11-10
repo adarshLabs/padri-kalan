@@ -1,0 +1,12 @@
+{
+  "name": "Padri Kalan · पडरी कलाँ",
+  "short_name": "Padri Kalan",
+  "description": "Community-run website of Padri Kalan village, Unnao (not a government site)",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fbf8f2",
+  "theme_color": "#2f6b3a",
+  "lang": "hi",
+  "icons": [{ "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

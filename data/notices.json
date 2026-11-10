@@ -1,0 +1,17 @@
+{
+  "_help": "Add a notice by copying one item below. date is YYYY-MM-DD. Write title and body in both Hindi (hi) and English (en). Only post notices from an official source or confirmed by the Gram Panchayat. Delete the sample item once you have a real one.",
+  "items": [
+    {
+      "date": "2026-11-10",
+      "title": {
+        "hi": "वेबसाइट शुरू हुई",
+        "en": "Website launched"
+      },
+      "body": {
+        "hi": "पडरी कलाँ की सामुदायिक वेबसाइट का पहला संस्करण तैयार है। गाँव की कहानियाँ, फ़ोटो (अनुमति के साथ) और सुधार भेजकर इसे बेहतर बनाने में मदद करें।",
+        "en": "The first version of the Padri Kalan community website is ready. Help improve it by sending village stories, photos (with permission) and corrections."
+      },
+      "source": "Community"
+    }
+  ]
+}
