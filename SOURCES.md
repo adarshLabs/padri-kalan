@@ -43,6 +43,7 @@ Every fact on the site, where it came from, and how sure we are. Checked on 10 N
 
 - Searched in English and Hindi ("Baleshwari Mandir Padri Kalan", "बालेश्वरी मंदिर पडरी उन्नाव", "बालेश्वरी देवी मंदिर उन्नाव बिछिया", and others). **No web page, news story or record about the temple was found.** The site names the temple because villagers know it, and leaves the details to be confirmed locally.
 - **No freely licensed (Creative Commons / Wikimedia) photos of Padri Kalan or the temple were found.** Photos on Google Maps, Facebook, YouTube and news sites are copyrighted and are not copied. The gallery is built to take villagers' own photos with credit.
+- 11 Nov 2026: searched again for "Maa Baleshwari Dham Padri Kalan" (and on Wikimedia Commons and Flickr). Still no openly licensed photos. Google Maps has visitors' photos, but they belong to the uploaders (Google Maps terms do not allow copying them), so the temple page shows the official Google Maps embed and a button that opens the photos on Google Maps instead.
 - A possible lead: a YouTube video titled "पडरी रामलीला … Laxman Parshuram Samvad" (https://www.youtube.com/watch?v=cCKS8qUFqdQ). It is not confirmed to be this Padri. If it is, ask the channel owner before linking or embedding it.
 
 ## Not yet found online (collect locally)

@@ -280,3 +280,8 @@ footer.site .btn { background: transparent; color: #fff; border-color: rgba(255,
   html { scroll-behavior: auto; }
   .bar .fill, .tile, .btn { transition: none; }
 }
+
+/* Map embed on the temple page */
+.mapframe{position:relative;width:100%;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:var(--line,#ddd);margin-top:10px}
+.mapframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media (max-width:600px){.mapframe{aspect-ratio:4/5}}
